@@ -4,8 +4,8 @@ A Laravel-based volunteer registration and event management platform for www.sir
 
 ## 🔧 Stack
 
-- Laravel 11
-- FilamentPHP
+- Laravel 12.x
+- FilamentPHP 3.x
 - Blade + TailwindCSS
 - MySQL
 
