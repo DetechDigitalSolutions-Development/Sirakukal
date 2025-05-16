@@ -12,7 +12,7 @@
     {{-- Focus Areas Section --}}
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 heading-dynamic">Our Focus Areas</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 heading-dynamic">{{ __('message.headings.our_focus_areas') }}</h2>
             @include('components.cms.focus-area')
         </div>
     </section>
@@ -24,6 +24,7 @@
             @include('components.cms.impact-stats')
         </div>
     </section>
+    
 
     @include('components.cms.about')
     {{-- Events Section --}}
