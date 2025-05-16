@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('components.cms.aboutus')
     {{-- Hero Section --}}
     <section class="bg-gray-50 py-12">
         <div class="container mx-auto px-4">
