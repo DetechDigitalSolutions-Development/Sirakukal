@@ -1,3 +1,4 @@
+
 <div class="bg-white rounded-lg shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
     <div class="flex items-center mb-4">
         <div class="rounded-full bg-primary bg-opacity-10 p-3 mr-4">
