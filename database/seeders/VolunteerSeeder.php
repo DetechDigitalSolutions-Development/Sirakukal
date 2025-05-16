@@ -1,36 +1,29 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Volunteer;
+use Faker\Factory as Faker;
 
 class VolunteerSeeder extends Seeder
 {
     public function run(): void
     {
-        $volunteers = [
-            [
-                'name' => 'Kavitha Raj',
-                'email' => 'kavitha@example.com',
-                'phone' => '0771234567',
-                'address' => '123 Beach Road, Colombo',
-                'skills' => json_encode(['Teaching', 'First Aid']),
-                'interested_areas' => json_encode(['Education', 'Health']),
-            ],
-            [
-                'name' => 'Nimal Perera',
-                'email' => 'nimal@example.com',
-                'phone' => '0787654321',
-                'address' => '456 Main Street, Jaffna',
-                'skills' => json_encode(['Cooking', 'Fundraising']),
-                'interested_areas' => json_encode(['Environment']),
-            ],
-            // Add more as needed...
-        ];
+        $faker = Faker::create();
 
-        foreach ($volunteers as $data) {
-            Volunteer::create($data);
+        $skillsPool = ['Teaching', 'First Aid', 'Cooking', 'Fundraising', 'Public Speaking'];
+        $interestsPool = ['Education', 'Health', 'Environment', 'Community Development'];
+
+        for ($i = 1; $i <= 10; $i++) {
+            Volunteer::create([
+                'volunteer_id' => 'VOL' . str_pad($i, 3, '0', STR_PAD_LEFT), // e.g. VOL001
+                'name' => $faker->name(),
+                'email' => $faker->unique()->safeEmail(),
+                'phone' => $faker->phoneNumber(),
+                'address' => $faker->address(),
+                'skills' => array_slice($skillsPool, 0, rand(1, 3)),
+                'interested_areas' => array_slice($interestsPool, 0, rand(1, 2)),
+            ]);
         }
     }
 }
