@@ -16,8 +16,7 @@ class Dashboard extends BaseDashboard
     protected function getHeaderWidgets(): array
     {
         return [
-            VolunteerStatsWidget::class,
-            EventStatsWidget::class,
+           
         ];
     }
 }
