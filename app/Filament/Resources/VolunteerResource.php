@@ -84,32 +84,56 @@ class VolunteerResource extends Resource
                     ->required(),
 
                 Textarea::make('reason_to_join')->label('Why do you want to join Sirakukal?')->required(),
+                Toggle::make('joined')->label('Has Joined?'),
             ])
             ->columns(2);
     }
+public static function table(Table $table): Table
+{
+    return $table
+        ->columns([
+            TextColumn::make('volunteer_id')->label('ID')->sortable()->searchable(),
+            TextColumn::make('full_name')->label('Full Name')->sortable()->searchable(),
+            TextColumn::make('name_with_initials')->label('Name with Initials')->sortable()->searchable(),
+            TextColumn::make('district')->sortable()->searchable(),
+            TextColumn::make('email')->sortable()->searchable(),
+            TextColumn::make('telephone')->label('Telephone')->searchable(),
+            TextColumn::make('whatsapp')->label('WhatsApp')->searchable()->toggleable(), // optional, toggle visibility
+            TextColumn::make('status')->label('Are you?')->sortable()->searchable(),
+            TextColumn::make('institution')->label('Institution')->searchable(),
+            TextColumn::make('referred_by')->label('How found Sirakukal')->sortable(),
+            BooleanColumn::make('joined')->label('Joined')->sortable(),
+            TextColumn::make('created_at')->dateTime()->label('Registered At')->sortable(),
+        ])
+        ->filters([
+            Tables\Filters\TernaryFilter::make('joined')->label('Joined Status'),
+            Tables\Filters\SelectFilter::make('status')
+                ->options([
+                    'School Leaver' => 'School Leaver',
+                    'Undergraduate' => 'Undergraduate',
+                    'Graduate' => 'Graduate',
+                    'Professional' => 'Professional',
+                    'Entrepreneur' => 'Entrepreneur',
+                ]),
+            Tables\Filters\SelectFilter::make('district')->label('District'),
+            Tables\Filters\SelectFilter::make('how_found_sirakukal')
+                ->label('How Found Sirakukal')
+                ->options([
+                    'Friends' => 'Friends',
+                    'Social Media' => 'Social Media',
+                    'Newspapers' => 'Newspapers',
+                    'Others' => 'Others',
+                ]),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
+        ]);
+}
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                TextColumn::make('volunteer_id')->label('ID')->sortable()->searchable(),
-                TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('email')->sortable()->searchable(),
-                TextColumn::make('phone')->searchable(),
-                BooleanColumn::make('joined')->label('Joined'),
-                TextColumn::make('created_at')->dateTime()->label('Registered At'),
-            ])
-            ->filters([
-                Tables\Filters\TernaryFilter::make('joined')->label('Joined Status'),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
 
     public static function getPages(): array
     {

@@ -22,6 +22,7 @@ class Volunteer extends Model
     'whatsapp',
     'referred_by',
     'reason_to_join',
+    'joined',
 ];
 
 

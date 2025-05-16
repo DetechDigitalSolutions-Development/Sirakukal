@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('whatsapp')->nullable();
             $table->enum('referred_by', ['Friends', 'Social Media', 'Newspapers', 'Others']);
             $table->text('reason_to_join');
+            $table->boolean('joined')->default(false);
             $table->timestamps();
         });
     }
