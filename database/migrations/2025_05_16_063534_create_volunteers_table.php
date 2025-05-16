@@ -13,16 +13,21 @@ return new class extends Migration
     {
         Schema::create('volunteers', function (Blueprint $table) {
             $table->id();
-
-            $table->string('volunteer_id')->unique();  
-            $table->string('name');                    
-            $table->string('email')->unique();        
-            $table->string('phone')->nullable();       
-            $table->text('address')->nullable();       
-            $table->text('skills')->nullable();        
-            $table->text('interested_areas')->nullable(); 
-
-            $table->boolean('joined')->default(false); // For join toggle logic
+            $table->string('volunteer_id')->unique();
+            $table->string('full_name');
+            $table->string('initials_name');
+            $table->string('district');
+            $table->text('address');
+            $table->string('nic_number');
+            $table->date('date_of_birth');
+            $table->date('joined_date')->nullable();
+            $table->enum('status', ['School Leaver', 'Undergraduate', 'Graduate', 'Professional', 'Entrepreneur']);
+            $table->string('institution');
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('whatsapp')->nullable();
+            $table->enum('referred_by', ['Friends', 'Social Media', 'Newspapers', 'Others']);
+            $table->text('reason_to_join');
             $table->timestamps();
         });
     }

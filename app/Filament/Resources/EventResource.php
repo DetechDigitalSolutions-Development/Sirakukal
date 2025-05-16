@@ -21,49 +21,51 @@ class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     //protected static ?string $navigationGroup = 'Event Management';
 
     public static function form(Form $form): Form
-{
-    return $form
-        ->schema([
-            TextInput::make('name')
-                ->label('Event Name')
-                ->required()
-                ->maxLength(255),
+    {
+        return $form
+            ->schema([
+                TextInput::make('name')
+                    ->label('Event Name')
+                    ->required()
+                    ->maxLength(255),
 
-            DatePicker::make('date')
-                ->label('Date')
-                ->required(),
+                DatePicker::make('date')
+                    ->label('Date')
+                    ->required(),
 
-            TimePicker::make('time')
-                ->label('Time')
-                ->required(),
+                TimePicker::make('time')
+                    ->label('Time')
+                    ->required(),
 
-            TextInput::make('venue')
-                ->label('Venue')
-                ->required()
-                ->maxLength(255),
+                TextInput::make('venue')
+                    ->label('Venue')
+                    ->required()
+                    ->maxLength(255),
 
-            Textarea::make('description')
-                ->label('Description')
-                ->nullable()
-                ->maxLength(1000),
+                Textarea::make('description')
+                    ->label('Description')
+                    ->nullable()
+                    ->maxLength(1000),
 
-            FileUpload::make('image_url')
-                ->label('Event Image')
-                ->image()
-                ->directory('event-images')
-                ->disk('public')
-                ->imageEditor()
-                ->preserveFilenames()
-                ->enableDownload()
-                ->enableOpen()
-                ->maxSize(2048),
-        ]);
-}
+                FileUpload::make('image_url')
+                    ->label('Event Image')
+                    ->image()
+                    ->directory('event-images')
+                    ->disk('public')
+                    ->imageEditor()
+                    ->preserveFilenames()
+                    ->enableDownload()
+                    ->enableOpen()
+                    ->maxSize(2048),
+            ]);
+    }
 
 
     public static function table(Table $table): Table

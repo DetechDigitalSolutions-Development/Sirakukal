@@ -6,9 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Volunteer extends Model
 {
-     protected $fillable = [
-        'name', 'email', 'phone', 'address', 'skills', 'interested_areas'
-    ];
+    protected $fillable = [
+    'volunteer_id',
+    'full_name',
+    'initials_name',
+    'district',
+    'address',
+    'nic_number',
+    'date_of_birth',
+    'joined_date',
+    'status',
+    'institution',
+    'email',
+    'phone',
+    'whatsapp',
+    'referred_by',
+    'reason_to_join',
+];
+
 
     protected $casts = [
         'skills' => 'array',

@@ -6,6 +6,8 @@ use App\Filament\Resources\VolunteerResource\Pages;
 use App\Filament\Resources\VolunteerResource\RelationManagers;
 use App\Models\Volunteer;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -21,51 +23,69 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VolunteerResource extends Resource
 {
-    protected static ?string $model = Volunteer::class;
 
+
+    protected static ?string $model = Volunteer::class;
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     // protected static ?string $navigationGroup = 'Volunteer Management';
+
+    //Auto-generate volunteer_id
+    protected static function booted()
+    {
+        static::creating(function ($volunteer) {
+            $volunteer->volunteer_id = 'VOL' . strtoupper(Str::random(6));
+        });
+    }
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('volunteer_id')
-                    ->label('Volunteer ID')
+                TextInput::make('volunteer_id')->required()->unique(ignoreRecord: true),
+
+                TextInput::make('full_name')->required(),
+                TextInput::make('initials_name')->label('Name with Initials')->required(),
+
+                TextInput::make('district')->required(),
+                TextInput::make('address')->label('Home Address')->required(),
+                TextInput::make('nic_number')->label('NIC Number')->required(),
+
+                DatePicker::make('date_of_birth')->required(),
+                DatePicker::make('joined_date')->label('Date')->nullable(),
+
+                Select::make('status')
+                    ->options([
+                        'School Leaver' => 'School Leaver',
+                        'Undergraduate' => 'Undergraduate',
+                        'Graduate' => 'Graduate',
+                        'Professional' => 'Professional',
+                        'Entrepreneur' => 'Entrepreneur',
+                    ])
                     ->required()
-                    ->maxLength(100),
+                    ->label('Are you?'),
 
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                TextInput::make('institution')->label('Working / Studying Institution')->required(),
 
-                TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
+                TextInput::make('email')->email()->required(),
+                TextInput::make('phone')->label('Telephone')->required(),
+                TextInput::make('whatsapp')->label('Whatsapp No')->nullable(),
 
-                TextInput::make('phone')
-                    ->tel()
-                    ->maxLength(20)
-                    ->nullable(),
+                Select::make('referred_by')
+                    ->label('How did you know about Sirakukal?')
+                    ->options([
+                        'Friends' => 'Friends',
+                        'Social Media' => 'Social Media',
+                        'Newspapers' => 'Newspapers',
+                        'Others' => 'Others',
+                    ])
+                    ->required(),
 
-                Textarea::make('address')
-                    ->maxLength(500)
-                    ->nullable(),
-
-                TagsInput::make('skills')
-                    ->label('Skills')
-                    ->nullable(),
-
-                TagsInput::make('interested_areas')
-                    ->label('Interested Areas')
-                    ->nullable(),
-
-                Toggle::make('joined')
-                    ->label('Joined')
-                    ->default(false),
-            ]);
+                Textarea::make('reason_to_join')->label('Why do you want to join Sirakukal?')->required(),
+            ])
+            ->columns(2);
     }
 
     public static function table(Table $table): Table
