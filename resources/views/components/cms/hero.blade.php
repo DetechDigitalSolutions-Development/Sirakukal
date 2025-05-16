@@ -12,11 +12,12 @@
                     <p class="text-xl mb-8 max-w-xl text-golden-sunrise font-medium">{{ $description ?? 'Join us in our mission to create a sustainable impact in communities through organized volunteer initiatives.' }}</p>
                     <div class="flex flex-wrap gap-4">
                         @include('components.ui.buttons.join', [
-                            'text' => 'Become a Volunteer',
+                            'text' => __('message.buttons.become_a_volunteer'),
+                            // 'text' => 'Become a Volunteer',
                             'class' => 'btn-primary'
                         ])
                         <a href="#about" class="btn-secondary border-2 border-golden-sunrise text-golden-sunrise hover:bg-charcoal-black/80 transition duration-300">
-                            Learn More
+                            {{ __('message.buttons.learn_more') }} 
                         </a>
                     </div>
                 </div>
