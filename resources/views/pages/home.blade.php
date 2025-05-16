@@ -25,6 +25,8 @@
         </div>
     </section>
     
+
+    @include('components.cms.about')
     {{-- Events Section --}}
     <section class="py-16 bg-ivory-white">
         <div class="container mx-auto px-4">
