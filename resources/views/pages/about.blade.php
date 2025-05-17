@@ -3,100 +3,66 @@
 @section('content')
     @include('components.cms.aboutus')
     {{-- Hero Section --}}
-   
-
-    {{-- Our Journey Timeline Section --}}
-    <section class="py-16 bg-white">
+    <section class="bg-gray-50 py-12">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">Our Journey: A Story of Hope</h2>
-                <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
-            </div>
-            
-            <div class="max-w-4xl mx-auto space-y-10">
-                <!-- 2015 -->
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4">
-                        <h3 class="text-xl font-bold text-primary">2015: The Seed of Hope</h3>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-gray-600">Founded by a small group of passionate individuals, driven by the vision of creating self-sufficient communities and providing aid where it's needed most. Our first project focused on providing clean water access in rural areas.</p>
-                    </div>
-                </div>
-                
-                <!-- 2018 -->
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4">
-                        <h3 class="text-xl font-bold text-primary">2018: Expanding Our Reach</h3>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-gray-600">Launched our education program, building schools and providing resources for children who lacked access to basic schooling. Started our first environmental conservation project, planting trees and organizing clean-up drives.</p>
-                    </div>
-                </div>
-                
-                <!-- 2021 -->
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4">
-                        <h3 class="text-xl font-bold text-primary">2021: Fostering Empowerment</h3>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-gray-600">Introduced vocational training programs to equip adults with skills for economic independence. Partnered with local businesses and international organizations to broaden our impact and resources.</p>
-                    </div>
-                </div>
-                
-                <!-- Today -->
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4">
-                        <h3 class="text-xl font-bold text-primary">Today: Growing Stronger</h3>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-gray-600">We continue to expand our initiatives, empowered by thousands of dedicated volunteers and generous donors, reaching more communities and making a tangible difference in the lives of many. Our focus remains on sustainable development and community leadership.</p>
-                    </div>
-                </div>
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl font-bold mb-4">About Sirakukal</h1>
+                <p class="text-xl text-gray-600">Learn more about our organization, mission and impact</p>
             </div>
         </div>
     </section>
-    
-    {{-- Our Pillars Section --}}
+
+    {{-- Main About Section --}}
+    <section class="py-16 bg-white">
+        @include('components.cms.about', [
+            'subtitle' => 'Our Story',
+            'title' => 'Who We Are',
+            'button_text' => 'Contact Us',
+            'button_link' => route('contact'),
+            'content' => '<p class="mb-4">Sirakukal is a volunteer-driven organization dedicated to creating positive change in communities through organized initiatives, education, and sustainable development projects.</p>
+            <p class="mb-4">Founded with the belief that collective action can transform communities, we mobilize resources and volunteers to address pressing social challenges and create lasting impact.</p>
+            <p>Our approach combines grassroots engagement with strategic planning to ensure that our initiatives are both effective and sustainable.</p>'
+        ])
+    </section>
+
+    {{-- Our Values Section --}}
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">Our Pillars</h2>
+                <h2 class="text-sm font-bold text-primary uppercase tracking-wider mb-2">Core Principles</h2>
+                <h3 class="text-3xl font-bold">Our Values</h3>
                 <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Mission -->
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-md text-center">
                     <div class="bg-primary/10 p-4 rounded-full inline-flex mb-4">
                         <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
                         </svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-2">Our Mission</h4>
-                    <p class="text-gray-600">To empower communities through sustainable initiatives, fostering resilience and self-reliance in underprivileged regions.</p>
+                    <h4 class="text-xl font-bold mb-2">Community First</h4>
+                    <p class="text-gray-600">We prioritize the needs and voices of the communities we serve, ensuring our work is relevant and impactful.</p>
                 </div>
-                
-                <!-- Goals -->
+
                 <div class="bg-white p-6 rounded-lg shadow-md text-center">
                     <div class="bg-primary/10 p-4 rounded-full inline-flex mb-4">
                         <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"></path>
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-2">Our Goals</h4>
-                    <p class="text-gray-600">Achieve measurable impact in education, environmental conservation, and economic empowerment for 10,000 individuals by 2030.</p>
+                    <h4 class="text-xl font-bold mb-2">Integrity</h4>
+                    <p class="text-gray-600">We operate with honesty and transparency, building trust through ethical practices and accountability.</p>
                 </div>
-                
-                <!-- Values -->
+
                 <div class="bg-white p-6 rounded-lg shadow-md text-center">
                     <div class="bg-primary/10 p-4 rounded-full inline-flex mb-4">
                         <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-2">Our Values</h4>
-                    <p class="text-gray-600">Integrity, Compassion, Collaboration, Sustainability, and Accountability guide every action we take.</p>
+                    <h4 class="text-xl font-bold mb-2">Innovation</h4>
+                    <p class="text-gray-600">We embrace creativity and fresh perspectives to develop new solutions for complex challenges.</p>
                 </div>
             </div>
         </div>
@@ -149,143 +115,13 @@
 
 
 
-    {{-- Moments of Impact Section --}}
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">Moments of Impact</h2>
-                <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Impact Item 1 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-1.png') }}" alt="Community Gardens" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Building community gardens together
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 2 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-2.jpg') }}" alt="Education" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Educating the next generation
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 3 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-3.jpg') }}" alt="Environmental Cleanup" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Keeping our environment clean
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 4 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-4.jpg') }}" alt="Health Services" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Providing essential health services
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 5 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-5.jpg') }}" alt="Food Distribution" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Distributing aid to families
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 6 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-6.jpeg') }}" alt="Tree Planting" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Planting trees for a greener future
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 7 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-7.jpeg') }}" alt="Skill Building" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Skill-building workshops
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Impact Item 8 -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-8.jpg') }}" alt="Community Support" class="w-full h-48 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm">
-                            Adding color to the community
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    {{-- Supported By Section --}}
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">Supported By</h2>
-                <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
-            </div>
-            
-            <div class="flex flex-wrap justify-center items-center gap-8 max-w-5xl mx-auto">
-                <!-- Partner logos -->
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-1.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-2.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-3.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-4.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-5.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-6.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-7.png') }}" alt="Partner" class="max-h-full">
-                </div>
-                <div class="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
-                    <img src="{{ asset('images/partners/partner-8.png') }}" alt="Partner" class="max-h-full">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    {{-- Ready to Make a Difference CTA --}}
+    {{-- Volunteer CTA Section --}}
     <section class="py-16 bg-primary text-white text-center">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-4">Ready to Make a Difference?</h2>
-            <p class="text-xl max-w-2xl mx-auto mb-8">Join the Hopegivers family today and contribute to a brighter future for communities in need. Every action counts.</p>
+            <h2 class="text-3xl font-bold mb-4">Join Our Community</h2>
+            <p class="text-xl max-w-2xl mx-auto mb-8">Become a volunteer today and be part of our mission to create positive change.</p>
             <a href="{{ route('volunteers.volunteer') }}" class="inline-flex items-center px-6 py-3 bg-white text-primary hover:bg-gray-100 font-medium rounded-lg transition duration-300">
-                Join Us Today
+                Become a Volunteer
                 <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                 </svg>

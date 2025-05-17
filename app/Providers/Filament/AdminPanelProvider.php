@@ -48,11 +48,11 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            // ->widgets([
-            //     Widgets\AccountWidget::class,
-            //     // VolunteerStatsWidget::class,
-            //     // EventStatsWidget::class,
-            // ])
+            ->widgets([
+                Widgets\AccountWidget::class,
+                VolunteerStatsWidget::class,
+                EventStatsWidget::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
