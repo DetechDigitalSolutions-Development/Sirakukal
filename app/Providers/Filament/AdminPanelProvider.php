@@ -21,9 +21,14 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Widgets\VolunteerStatsWidget;
 use App\Filament\Widgets\EventStatsWidget;
+use App\Filament\Widgets\RecentVolunteerActivity;
+use App\Filament\Widgets\UpcomingEvents;
+use App\Filament\Widgets\SignupsOverTime;
 
 class AdminPanelProvider extends PanelProvider
 {
+
+    protected static string $routePath = '/';
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -32,14 +37,14 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Sirakukal Admin')
-            ->brandLogo(fn () => asset('images/logo.svg')) // Add your logo
+            ->brandLogo(fn() => asset('images/logo.svg')) // Add your logo
             ->colors([
-                'primary' => Color::Amber,
+                'primary' =>  "#D72638",
             ])
             ->sidebarCollapsibleOnDesktop()
             ->navigationGroups([
                 \Filament\Navigation\NavigationGroup::make('Volunteer Management'),
-                \Filament\Navigation\NavigationGroup::make('Event Management' ),
+                \Filament\Navigation\NavigationGroup::make('Event Management'),
                 \Filament\Navigation\NavigationGroup::make('Site Settings'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -48,11 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->widgets([
-                Widgets\AccountWidget::class,
-                VolunteerStatsWidget::class,
-                EventStatsWidget::class,
-            ])
+            
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Widgets;
 
 use App\Models\Volunteer;
@@ -7,6 +8,12 @@ use Filament\Widgets\StatsOverviewWidget\Card;
 
 class VolunteerStatsWidget extends BaseWidget
 {
+    protected int|string|array $columnSpan = [
+        'default' => 6,
+        'md' => 3,
+        'xl' => 6,
+    ];
+
     protected function getCards(): array
     {
         return [
@@ -15,4 +22,3 @@ class VolunteerStatsWidget extends BaseWidget
         ];
     }
 }
-
