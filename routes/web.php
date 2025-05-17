@@ -145,3 +145,12 @@ Route::prefix('volunteers')->name('volunteers.')->group(function () {
 Route::get('/volunteer/search', function () {
     return redirect()->route('volunteers.verify', request()->query());
 })->name('volunteer.search');
+
+// Localization routes
+Route::get('/set-locale/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ta', 'si'])) {
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+    }
+    return back(); // Redirect back
+});
