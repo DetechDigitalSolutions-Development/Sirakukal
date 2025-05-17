@@ -1,4 +1,3 @@
-
 <div class="bg-white p-6 rounded-lg shadow-md mb-8">
     <div class="mb-4">
         <h4 class="text-lg font-bold mb-4">Filter Events</h4>

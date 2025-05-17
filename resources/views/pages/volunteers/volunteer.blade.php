@@ -2,11 +2,9 @@
 
 @section('title', 'Volunteer Portal - Sirakukal')
 
-
 @section('content')
-@include('components.cms.volunteer')
     <!-- Page Header -->
-    <!-- <div class="bg-gray-100 py-8">
+    <div class="bg-gray-100 py-8">
         <div class="container mx-auto px-4">
             <h1 class="text-3xl font-bold text-gray-800">Volunteer Portal</h1>
             <div class="flex items-center text-sm text-gray-500 mt-2">
@@ -15,7 +13,7 @@
                 <span>Volunteer Portal</span>
             </div>
         </div>
-    </div> -->
+    </div>
     
     <!-- Main Section -->
     <section class="py-12">

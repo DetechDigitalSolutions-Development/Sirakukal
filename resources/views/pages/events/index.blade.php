@@ -1,13 +1,10 @@
-
 @extends('layouts.app')
 
 @section('title', 'Events - Sirakukal')
 
-
 @section('content')
     <!-- Page Header -->
-     @include('components.cms.aim')
-    <!-- <div class="bg-gray-100 py-8">
+    <div class="bg-gray-100 py-8">
         <div class="container mx-auto px-4">
             <h1 class="text-3xl font-bold text-gray-800">Events</h1>
             <div class="flex items-center text-sm text-gray-500 mt-2">
@@ -16,7 +13,7 @@
                 <span>Events</span>
             </div>
         </div>
-    </div> -->
+    </div>
     
     <!-- Events Section -->
     <section class="py-16">
