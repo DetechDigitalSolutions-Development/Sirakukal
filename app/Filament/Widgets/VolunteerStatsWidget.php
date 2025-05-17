@@ -1,0 +1,18 @@
+<?php
+namespace App\Filament\Widgets;
+
+use App\Models\Volunteer;
+use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Card;
+
+class VolunteerStatsWidget extends BaseWidget
+{
+    protected function getCards(): array
+    {
+        return [
+            Card::make('Total Volunteers', Volunteer::count()),
+            Card::make('Joined Volunteers', Volunteer::where('joined', true)->count()),
+        ];
+    }
+}
+
