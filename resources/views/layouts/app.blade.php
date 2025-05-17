@@ -129,15 +129,69 @@
 </head>
 <body class="bg-ivory-white text-charcoal-black">
     <header class="bg-white shadow">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" class="font-bold text-2xl heading-large">Sirakukal</a>
-            <nav class="space-x-6">
-                <a href="/" class="text-charcoal-black hover:text-flame-red font-medium">Home</a>
-                <a href="{{ route('about') }}" class="text-charcoal-black hover:text-flame-red font-medium">About</a>
-                <a href="{{ route('events.index') }}" class="text-charcoal-black hover:text-flame-red font-medium">Events</a>
-                <a href="{{ route('volunteers.volunteer') }}" class="text-charcoal-black hover:text-flame-red font-medium">Volunteer Portal</a>
-                <a href="{{ route('contact') }}" class="text-charcoal-black hover:text-flame-red font-medium">Contact</a>
-            </nav>
+        <div x-data="{ mobileMenuOpen: false }" class="container mx-auto px-4 py-2">
+            <!-- Flexible layout with logo and nav closer together -->
+            <div class="flex items-center justify-between">
+                <!-- Left side with logo and navigation combined -->
+                <div class="flex items-center">
+                    <!-- Logo -->
+                    <div class="mr-8">
+                        <a href="/" class="flex items-center">
+                            <img src="{{ asset('images/Logo (1).PNG') }}" alt="Sirakukal Logo" class="h-12">
+                        </a>
+                    </div>
+                    
+                    <!-- Main Navigation - next to logo -->
+                    <nav class="hidden md:flex items-center space-x-5">
+                        <a href="/" class="text-charcoal-black hover:text-flame-red font-medium">Home</a>
+                        <a href="{{ route('about') }}" class="text-charcoal-black hover:text-flame-red font-medium">About Us</a>
+                        <a href="{{ route('events.index') }}" class="text-charcoal-black hover:text-flame-red font-medium">Events</a>
+                        <a href="{{ route('aim') }}" class="text-charcoal-black hover:text-flame-red font-medium">Aim</a>
+                        <a href="{{ route('impact') }}" class="text-charcoal-black hover:text-flame-red font-medium">Impact</a>
+                        <a href="{{ route('contact') }}" class="text-charcoal-black hover:text-flame-red font-medium">Contact</a>
+                    </nav>
+                </div>
+                
+                <!-- CTA Buttons on the right -->
+                <div class="flex items-center justify-end space-x-3">
+                    <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-3 py-1 rounded hover:bg-sunset-orange transition duration-300 text-sm">Join Us</a>
+                    <button 
+                        @click="$dispatch('open-volunteer-search-modal'); mobileMenuOpen = false" 
+                        class="bg-charcoal-black text-white font-medium px-3 py-1 rounded hover:bg-gray-700 transition duration-300 text-sm cursor-pointer"
+                    >
+                        Find my Id
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button type="button" class="md:hidden text-gray-500 hover:text-flame-red focus:outline-none" 
+                            @click="mobileMenuOpen = !mobileMenuOpen">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="container mx-auto px-4 md:hidden" x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg rounded-lg mt-2">
+                    <a href="/" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Home</a>
+                    <a href="{{ route('about') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">About Us</a>
+                    <a href="{{ route('events.index') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Events</a>
+                    <a href="{{ route('aim') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Aim</a>
+                    <a href="{{ route('impact') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Impact</a>
+                    <a href="{{ route('contact') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Contact</a>
+                    <div class="flex space-x-2 px-3 py-2">
+                        <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-3 py-1 rounded hover:bg-sunset-orange transition duration-300 text-sm">Join Us</a>
+                        <button 
+                            @click="$dispatch('open-volunteer-search-modal')" 
+                            class="bg-charcoal-black text-white font-medium px-3 py-1 rounded hover:bg-gray-700 transition duration-300 cursor-pointer"
+                        >
+                            Find my Id
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     <main class="min-h-screen">
@@ -189,5 +243,7 @@
             </div>
         </div>
     </footer>
+    <!-- Include the volunteer search modal -->    
+    @include('modals.volunteer-search-modal')
 </body>
 </html>
