@@ -2,7 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VolunteerController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutusController;
+use App\Http\Controllers\AimController;
+use App\Http\Controllers\ImpactController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\ContactController;
 
 /**
  * Mock Data - Centralized for consistency
@@ -154,29 +160,38 @@ function getMockVolunteer($nic = null)
 /**
  * Main Pages Routes
  */
-Route::get('/', function () {
-    $events = getMockEvents();
-    $impactStats = getMockImpactStats();
-    $testimonials = getMockTestimonials();
-    return view('pages.home', compact('events', 'impactStats', 'testimonials'));
-})->name('home');
+// Route::get('/', function () {
+//     $events = getMockEvents();
+//     $impactStats = getMockImpactStats();
+//     $testimonials = getMockTestimonials();
+//     return view('pages.home', compact('events', 'impactStats', 'testimonials'));
+// })->name('home');
 
-Route::get('/about', function () {
-    return view('pages.about');
-})->name('about');
 
-Route::get('/aim', function () {
-    return view('pages.aim');
-})->name('aim');
 
-Route::get('/impact', function () {
-    $impactStats = getMockImpactStats();
-    return view('pages.impact', compact('impactStats'));
-})->name('impact');
+// Route::get('/about', function () {
+//     return view('pages.about');
+// })->name('about');
+
+// Route::get('/aim', function () {
+//     return view('pages.aim');
+// })->name('aim');
+
+// Route::get('/impact', function () {
+//     $impactStats = getMockImpactStats();
+//     return view('pages.impact', compact('impactStats'));
+// })->name('impact');
 
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutusController::class, 'index'])->name('about');
+Route::get('/events', [EventsController::class, 'index'])->name('event');
+Route::get('/aim', [AimController::class, 'index'])->name('aim');
+Route::get('/impact', [ImpactController::class, 'index'])->name('impact');
+// Route::get('/contact', [EventsController::class, 'index'])->name('contact');
 /**
  * Events Routes
  */
