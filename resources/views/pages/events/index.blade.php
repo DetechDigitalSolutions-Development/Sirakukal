@@ -53,13 +53,23 @@
                             </select>
                         </div>
                         
+                        <!-- Mode Filter -->
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-2">Mode</h4>
+                            <select name="mode" id="mode-filter" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="">Any Mode</option>
+                                <option value="physical" {{ isset($mode) && $mode === 'physical' ? 'selected' : '' }}>Physical</option>
+                                <option value="online" {{ isset($mode) && $mode === 'online' ? 'selected' : '' }}>Online</option>
+                            </select>
+                        </div>
+                        
                         <!-- Filter Actions -->
                         <div class="flex space-x-2">
                             <button type="submit" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition-colors duration-200">
                                 Apply Filters
                             </button>
                             
-                            @if($location || $dateFilter || $activeType)
+                            @if($location || $dateFilter || $activeType || (isset($mode) && $mode))
                                 <a href="{{ route('events.index') }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded text-center transition-colors duration-200">
                                     Clear
                                 </a>

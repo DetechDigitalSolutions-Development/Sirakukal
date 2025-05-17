@@ -9,6 +9,30 @@
     <!-- Alpine.js for interactive components -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
+    <!-- Smooth scroll behavior for anchor links -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL hash without jumping
+                        history.pushState(null, null, targetId);
+                    }
+                });
+            });
+        });
+    </script>
+    
     <!-- Custom styles for brand colors -->
     <style>
         :root {
@@ -128,7 +152,8 @@
     </style>
 </head>
 <body class="bg-ivory-white text-charcoal-black">
-    <header class="bg-white shadow">
+    <!-- Sticky Navbar Wrapper -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
         <div x-data="{ mobileMenuOpen: false }" class="container mx-auto px-4 py-2">
             <!-- Flexible layout with logo and nav closer together -->
             <div class="flex items-center justify-between">
@@ -173,27 +198,27 @@
             </div>
             
             <!-- Mobile Navigation Menu -->
-            <div class="container mx-auto px-4 md:hidden" x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100">
-                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg rounded-lg mt-2">
-                    <a href="/" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Home</a>
-                    <a href="{{ route('about') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">About Us</a>
-                    <a href="{{ route('events.index') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Events</a>
-                    <a href="{{ route('aim') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Aim</a>
-                    <a href="{{ route('impact') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Impact</a>
-                    <a href="{{ route('contact') }}" class="block px-3 py-2 text-charcoal-black hover:text-flame-red font-medium">Contact</a>
-                    <div class="flex space-x-2 px-3 py-2">
-                        <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-3 py-1 rounded hover:bg-sunset-orange transition duration-300 text-sm">Join Us</a>
-                        <button 
-                            @click="$dispatch('open-volunteer-search-modal')" 
-                            class="bg-charcoal-black text-white font-medium px-3 py-1 rounded hover:bg-gray-700 transition duration-300 cursor-pointer"
-                        >
-                            Find my Id
-                        </button>
-                    </div>
+            <div class="md:hidden fixed inset-x-0 top-16 z-40" x-show="mobileMenuOpen" 
+                 x-transition:enter="transition ease-out duration-200" 
+                 x-transition:enter-start="opacity-0 transform -translate-y-10" 
+                 x-transition:enter-end="opacity-100 transform translate-y-0" 
+                 x-transition:leave="transition ease-in duration-150" 
+                 x-transition:leave-start="opacity-100 transform translate-y-0" 
+                 x-transition:leave-end="opacity-0 transform -translate-y-10">
+                <div class="bg-white shadow-lg border-t border-gray-100 py-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
+                    <nav class="container mx-auto px-4 flex flex-col space-y-1">
+                        <a href="/" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Home</a>
+                        <a href="{{ route('about') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">About Us</a>
+                        <a href="{{ route('events.index') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Events</a>
+                        <a href="{{ route('aim') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Aim</a>
+                        <a href="{{ route('impact') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Impact</a>
+                        <a href="{{ route('contact') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Contact</a>
+                    </nav>
                 </div>
             </div>
         </div>
     </header>
+    
     <main class="min-h-screen">
         @yield('content')
     </main>
@@ -245,5 +270,8 @@
     </footer>
     <!-- Include the volunteer search modal -->    
     @include('modals.volunteer-search-modal')
+
+    <!-- Include the scroll buttons for quick navigation -->
+    @include('components.ui.scroll-button')
 </body>
 </html>

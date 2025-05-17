@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Hero Section --}}
-    @include('components.cms.aim')
+    @include('components.cms.impact')
 
     {{-- What We've Achieved Section --}}
     <section class="py-20 bg-white">

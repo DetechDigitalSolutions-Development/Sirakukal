@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Hero Section --}}
-    @include('components.cms.hero')
+    @include('components.cms.volunteer')
 
     {{-- Benefits of Volunteering Section --}}
     <section class="py-20 bg-white">
