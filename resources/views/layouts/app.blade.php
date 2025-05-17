@@ -9,6 +9,30 @@
     <!-- Alpine.js for interactive components -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
+    <!-- Smooth scroll behavior for anchor links -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL hash without jumping
+                        history.pushState(null, null, targetId);
+                    }
+                });
+            });
+        });
+    </script>
+    
     <!-- Custom styles for brand colors -->
     <style>
         :root {
@@ -245,5 +269,8 @@
     </footer>
     <!-- Include the volunteer search modal -->    
     @include('modals.volunteer-search-modal')
+
+    <!-- Include the scroll buttons for quick navigation -->
+    @include('components.ui.scroll-button')
 </body>
 </html>

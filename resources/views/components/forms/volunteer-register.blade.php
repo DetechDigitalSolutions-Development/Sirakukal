@@ -1,18 +1,64 @@
 <div x-data="{
     formData: {
         full_name: '',
-        name_with_initials: '',
+        initials_name: '',
         district: '',
-        home_address: '',
-        dob: '',
-        date: '',
-        applicant_type: '',
+        address: '',
+        nic_number: '',
+        date_of_birth: '',
+        joined_date: '',
+        status: 'pending',
         institution: '',
         email: '',
-        telephone: '',
+        phone: '',
         whatsapp: '',
-        how_know: '',
-        why_join: ''
+        referred_by: '',
+        reason_to_join: '',
+        joined: 'no'
+    },
+    
+    districts: [
+        'Thirukonamalai',
+        'Mattakalappu',
+        'Amparai',
+        'Nuwara Eliya',
+        'Mullaitivu',
+        'Vavuniya',
+        'Kilinochchi',
+        'Yarlpannam',
+        'Mannar',
+        'Kandy',
+        'Matale',
+        'Puttalam',
+        'Badulla',
+        'Kegalle',
+        'Colombo',
+        'Gampaha',
+        'Kalutara',
+        'Kurunegala',
+        'Ratnapura',
+        'Polonnaruwa',
+        'Anuradhapura',
+        'Monaragala',
+        'Hambantota',
+        'Matara',
+        'Galle'
+    ],
+    
+    districtSearch: '',
+    showDropdown: false,
+    
+    filteredDistricts() {
+        if (!this.districtSearch) return this.districts;
+        return this.districts.filter(district => 
+            district.toLowerCase().includes(this.districtSearch.toLowerCase())
+        );
+    },
+    
+    selectDistrict(district) {
+        this.formData.district = district;
+        this.districtSearch = district;
+        this.showDropdown = false;
     },
     
     submit() {
@@ -43,57 +89,100 @@
                 
                 <!-- Name with Initials -->
                 <div>
-                    <label for="name_with_initials" class="block text-sm font-medium text-gray-700 mb-1">Name with Initials <span class="text-red-500">*</span></label>
+                    <label for="initials_name" class="block text-sm font-medium text-gray-700 mb-1">Name with Initials <span class="text-red-500">*</span></label>
                     <input 
                         type="text" 
-                        id="name_with_initials" 
-                        name="name_with_initials" 
-                        x-model="formData.name_with_initials" 
+                        id="initials_name" 
+                        name="initials_name" 
+                        x-model="formData.initials_name" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
                         required
                     >
-                    @include('components.forms.validation.input-error', ['field' => 'name_with_initials'])
+                    @include('components.forms.validation.input-error', ['field' => 'initials_name'])
                 </div>
                 
                 <!-- District -->
                 <div>
                     <label for="district" class="block text-sm font-medium text-gray-700 mb-1">District <span class="text-red-500">*</span></label>
-                    <input 
-                        type="text" 
-                        id="district" 
-                        name="district" 
-                        x-model="formData.district" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
-                        required
-                    >
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="district" 
+                            name="district" 
+                            x-model="formData.district" 
+                            x-model:display="districtSearch"
+                            @focus="showDropdown = true" 
+                            @click.outside="showDropdown = false"
+                            @input="showDropdown = true"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
+                            placeholder="Type to search districts"
+                            autocomplete="off"
+                            required
+                        >
+                        <div 
+                            x-show="showDropdown" 
+                            x-transition 
+                            class="absolute z-10 w-full mt-1 bg-white shadow-lg rounded-md border border-gray-300 max-h-60 overflow-y-auto"
+                        >
+                            <template x-for="district in filteredDistricts()" :key="district">
+                                <div 
+                                    @click="selectDistrict(district)" 
+                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                    :class="{'bg-gray-100': formData.district === district}"
+                                    x-text="district"
+                                ></div>
+                            </template>
+                            <div 
+                                x-show="filteredDistricts().length === 0" 
+                                class="px-4 py-2 text-gray-500 italic"
+                            >
+                                No matching districts
+                            </div>
+                        </div>
+                    </div>
                     @include('components.forms.validation.input-error', ['field' => 'district'])
                 </div>
                 
+                <!-- NIC Number -->
+                <div>
+                    <label for="nic_number" class="block text-sm font-medium text-gray-700 mb-1">NIC Number <span class="text-red-500">*</span></label>
+                    <input 
+                        type="text" 
+                        id="nic_number" 
+                        name="nic_number" 
+                        x-model="formData.nic_number" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
+                        placeholder="123456789V or 200012345678" 
+                        required
+                    >
+                    @include('components.forms.validation.input-error', ['field' => 'nic_number'])
+                </div>
+
                 <!-- Date of Birth -->
                 <div>
-                    <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth <span class="text-red-500">*</span></label>
+                    <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth <span class="text-red-500">*</span></label>
                     <input 
                         type="date" 
-                        id="dob" 
-                        name="dob" 
-                        x-model="formData.dob" 
+                        id="date_of_birth" 
+                        name="date_of_birth" 
+                        x-model="formData.date_of_birth" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
                         required
                     >
-                    @include('components.forms.validation.input-error', ['field' => 'dob'])
+                    @include('components.forms.validation.input-error', ['field' => 'date_of_birth'])
                 </div>
                 
-                <!-- Date -->
+                <!-- Joined Date -->
                 <div>
-                    <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                    <label for="joined_date" class="block text-sm font-medium text-gray-700 mb-1">Joined Date</label>
                     <input 
                         type="date" 
-                        id="date" 
-                        name="date" 
-                        x-model="formData.date" 
+                        id="joined_date" 
+                        name="joined_date" 
+                        x-model="formData.joined_date" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
                     >
-                    @include('components.forms.validation.input-error', ['field' => 'date'])
+                    @include('components.forms.validation.input-error', ['field' => 'joined_date'])
                 </div>
                 
                 <!-- Applicant Type -->
@@ -130,18 +219,18 @@
                     @include('components.forms.validation.input-error', ['field' => 'email'])
                 </div>
                 
-                <!-- Telephone -->
+                <!-- Phone -->
                 <div>
-                    <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Telephone <span class="text-red-500">*</span></label>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone <span class="text-red-500">*</span></label>
                     <input 
                         type="tel" 
-                        id="telephone" 
-                        name="telephone" 
-                        x-model="formData.telephone" 
+                        id="phone" 
+                        name="phone" 
+                        x-model="formData.phone" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
                         required
                     >
-                    @include('components.forms.validation.input-error', ['field' => 'telephone'])
+                    @include('components.forms.validation.input-error', ['field' => 'phone'])
                 </div>
                 
                 <!-- WhatsApp -->
@@ -159,36 +248,37 @@
                 
                 <!-- How did you know about Sirakukal -->
                 <div>
-                    <label for="how_know" class="block text-sm font-medium text-gray-700 mb-1">How to know about Sirakukal <span class="text-red-500">*</span></label>
+                    <label for="referred_by" class="block text-sm font-medium text-gray-700 mb-1">How did you hear about Sirakukal <span class="text-red-500">*</span></label>
                     <select 
-                        id="how_know" 
-                        name="how_know" 
-                        x-model="formData.how_know" 
+                        id="referred_by" 
+                        name="referred_by" 
+                        x-model="formData.referred_by" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
                         required
                     >
                         <option value="">Select an option</option>
-                        <option value="friends">Friends</option>
                         <option value="social_media">Social Media</option>
-                        <option value="newspapers">Newspapers</option>
-                        <option value="others">Others</option>
+                        <option value="friends">Friends</option>
+                        <option value="newspaper">Newspaper</option>
+                        <option value="university">University</option>
+                        <option value="other">Other</option>
                     </select>
-                    @include('components.forms.validation.input-error', ['field' => 'how_know'])
+                    @include('components.forms.validation.input-error', ['field' => 'referred_by'])
                 </div>
             </div>
             
-            <!-- Home Address -->
+            <!-- Address -->
             <div class="col-span-full">
-                <label for="home_address" class="block text-sm font-medium text-gray-700 mb-1">Home Address <span class="text-red-500">*</span></label>
+                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Home Address <span class="text-red-500">*</span></label>
                 <textarea 
-                    id="home_address" 
-                    name="home_address" 
-                    x-model="formData.home_address" 
+                    id="address" 
+                    name="address" 
+                    x-model="formData.address" 
                     rows="3" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
                     required
                 ></textarea>
-                @include('components.forms.validation.input-error', ['field' => 'home_address'])
+                @include('components.forms.validation.input-error', ['field' => 'address'])
             </div>
             
             <!-- Institution -->
@@ -205,18 +295,18 @@
                 @include('components.forms.validation.input-error', ['field' => 'institution'])
             </div>
             
-            <!-- Why Join -->
+            <!-- Why Join Sirakukal textarea -->
             <div class="col-span-full">
-                <label for="why_join" class="block text-sm font-medium text-gray-700 mb-1">Why you like to Join Sirakukal <span class="text-red-500">*</span></label>
+                <label for="reason_to_join" class="block text-sm font-medium text-gray-700 mb-1">Why do you want to join Sirakukal? <span class="text-red-500">*</span></label>
                 <textarea 
-                    id="why_join" 
-                    name="why_join" 
-                    x-model="formData.why_join" 
+                    id="reason_to_join" 
+                    name="reason_to_join" 
+                    x-model="formData.reason_to_join" 
                     rows="4" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" 
                     required
                 ></textarea>
-                @include('components.forms.validation.input-error', ['field' => 'why_join'])
+                @include('components.forms.validation.input-error', ['field' => 'reason_to_join'])
             </div>
             
             <div class="mt-8">

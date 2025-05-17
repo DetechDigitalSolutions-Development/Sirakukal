@@ -8,7 +8,7 @@
         <p class="text-lg md:text-xl mb-6 max-w-2xl">
             Join our community and make a real difference in the lives of others and the world around us.
         </p>
-        <a href="{{ route('volunteers.register') }}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow">
+        <a href="#volunteer-form" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow">
             Register to Volunteer
         </a>
     </div>
