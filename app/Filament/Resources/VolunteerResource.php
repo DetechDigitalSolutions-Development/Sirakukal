@@ -47,11 +47,40 @@ class VolunteerResource extends Resource
                 TextInput::make('volunteer_id')->required()->unique(ignoreRecord: true),
 
                 TextInput::make('full_name')->required(),
-                TextInput::make('initials_name')->label('Name with Initials')->required(),
+                TextInput::make('initials_name')->label('Name with Initials'),
 
-                TextInput::make('district')->required(),
+                Select::make('district')
+                    ->options([
+                        'Thirukonamalai' => 'Thirukonamalai',
+                        'Mattakalappu' => 'Mattakalappu',
+                        'Amparai' => 'Amparai',
+                        'Nuwara Eliya' => 'Nuwara Eliya',
+                        'Mullaitivu' => 'Mullaitivu',
+                        'Vavuniya' => 'Vavuniya',
+                        'Kilinochchi' => 'Kilinochchi',
+                        'Yarlpannam' => 'Yarlpannam',
+                        'Mannar' => 'Mannar',
+                        'Kandy' => 'Kandy',
+                        'Matale' => 'Matale',
+                        'Puttalam' => 'Puttalam',
+                        'Badulla' => 'Badulla',
+                        'Kegalle' => 'Kegalle',
+                        'Colombo' => 'Colombo',
+                        'Gampaha' => 'Gampaha',
+                        'Kalutara' => 'Kalutara',
+                        'Kurunegala' => 'Kurunegala',
+                        'Ratnapura' => 'Ratnapura',
+                        'Polonnaruwa' => 'Polonnaruwa',
+                        'Anuradhapura' => 'Anuradhapura',
+                        'Monaragala' => 'Monaragala',
+                        'Hambantota' => 'Hambantota',
+                        'Matara' => 'Matara',
+                        'Galle' => 'Galle',
+                    ])
+
+                    ->required(),
                 TextInput::make('address')->label('Home Address')->required(),
-                TextInput::make('nic_number')->label('NIC Number')->required(),
+                TextInput::make('nic_number')->label('NIC Number')->nullable(),
 
                 DatePicker::make('date_of_birth')->required(),
                 DatePicker::make('joined_date')->label('Date')->nullable(),
@@ -88,51 +117,79 @@ class VolunteerResource extends Resource
             ])
             ->columns(2);
     }
-public static function table(Table $table): Table
-{
-    return $table
-        ->columns([
-            TextColumn::make('volunteer_id')->label('ID')->sortable()->searchable(),
-            TextColumn::make('full_name')->label('Full Name')->sortable()->searchable(),
-            TextColumn::make('name_with_initials')->label('Name with Initials')->sortable()->searchable(),
-            TextColumn::make('district')->sortable()->searchable(),
-            TextColumn::make('email')->sortable()->searchable(),
-            TextColumn::make('telephone')->label('Telephone')->searchable(),
-            TextColumn::make('whatsapp')->label('WhatsApp')->searchable()->toggleable(), // optional, toggle visibility
-            TextColumn::make('status')->label('Are you?')->sortable()->searchable(),
-            TextColumn::make('institution')->label('Institution')->searchable(),
-            TextColumn::make('referred_by')->label('How found Sirakukal')->sortable(),
-            BooleanColumn::make('joined')->label('Joined')->sortable(),
-            TextColumn::make('created_at')->dateTime()->label('Registered At')->sortable(),
-        ])
-        ->filters([
-            Tables\Filters\TernaryFilter::make('joined')->label('Joined Status'),
-            Tables\Filters\SelectFilter::make('status')
-                ->options([
-                    'School Leaver' => 'School Leaver',
-                    'Undergraduate' => 'Undergraduate',
-                    'Graduate' => 'Graduate',
-                    'Professional' => 'Professional',
-                    'Entrepreneur' => 'Entrepreneur',
-                ]),
-            Tables\Filters\SelectFilter::make('district')->label('District'),
-            Tables\Filters\SelectFilter::make('how_found_sirakukal')
-                ->label('How Found Sirakukal')
-                ->options([
-                    'Friends' => 'Friends',
-                    'Social Media' => 'Social Media',
-                    'Newspapers' => 'Newspapers',
-                    'Others' => 'Others',
-                ]),
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
-        ]);
-}
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('volunteer_id')->label('ID')->sortable()->searchable(),
+                TextColumn::make('full_name')->label('Full Name')->sortable()->searchable(),
+                TextColumn::make('name_with_initials')->label('Name with Initials')->sortable()->searchable(),
+                TextColumn::make('district')->sortable()->searchable(),
+                TextColumn::make('email')->sortable()->searchable(),
+                TextColumn::make('telephone')->label('Telephone')->searchable(),
+                TextColumn::make('whatsapp')->label('WhatsApp')->searchable()->toggleable(), // optional, toggle visibility
+                TextColumn::make('status')->label('Are you?')->sortable()->searchable(),
+                TextColumn::make('institution')->label('Institution')->searchable(),
+                TextColumn::make('referred_by')->label('How found Sirakukal')->sortable(),
+                BooleanColumn::make('joined')->label('Joined')->sortable(),
+                TextColumn::make('created_at')->dateTime()->label('Registered At')->sortable(),
+            ])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('joined')->label('Joined Status'),
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'School Leaver' => 'School Leaver',
+                        'Undergraduate' => 'Undergraduate',
+                        'Graduate' => 'Graduate',
+                        'Professional' => 'Professional',
+                        'Entrepreneur' => 'Entrepreneur',
+                    ]),
+                Tables\Filters\SelectFilter::make('district')
+                    ->label('District')
+                    ->options([
+                        'Thirukonamalai' => 'Thirukonamalai',
+                        'Mattakalappu' => 'Mattakalappu',
+                        'Amparai' => 'Amparai',
+                        'Nuwara Eliya' => 'Nuwara Eliya',
+                        'Mullaitivu' => 'Mullaitivu',
+                        'Vavuniya' => 'Vavuniya',
+                        'Kilinochchi' => 'Kilinochchi',
+                        'Yarlpannam' => 'Yarlpannam',
+                        'Mannar' => 'Mannar',
+                        'Kandy' => 'Kandy',
+                        'Matale' => 'Matale',
+                        'Puttalam' => 'Puttalam',
+                        'Badulla' => 'Badulla',
+                        'Kegalle' => 'Kegalle',
+                        'Colombo' => 'Colombo',
+                        'Gampaha' => 'Gampaha',
+                        'Kalutara' => 'Kalutara',
+                        'Kurunegala' => 'Kurunegala',
+                        'Ratnapura' => 'Ratnapura',
+                        'Polonnaruwa' => 'Polonnaruwa',
+                        'Anuradhapura' => 'Anuradhapura',
+                        'Monaragala' => 'Monaragala',
+                        'Hambantota' => 'Hambantota',
+                        'Matara' => 'Matara',
+                        'Galle' => 'Galle',
+                    ]),
+                Tables\Filters\SelectFilter::make('how_found_sirakukal')
+                    ->label('How Found Sirakukal')
+                    ->options([
+                        'Friends' => 'Friends',
+                        'Social Media' => 'Social Media',
+                        'Newspapers' => 'Newspapers',
+                        'Others' => 'Others',
+                    ]),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
+    }
 
 
     public static function getPages(): array
