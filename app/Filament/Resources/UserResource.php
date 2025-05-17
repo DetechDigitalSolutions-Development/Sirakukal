@@ -15,8 +15,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UserResource extends Resource
 {
-    protected static ?string $model = User::class;
 
+
+    protected static ?string $model = User::class;
+    protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
@@ -34,8 +36,8 @@ class UserResource extends Resource
 
                 TextInput::make('password')
                     ->password()
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context) => $context === 'create'),
+                    ->dehydrated(fn($state) => filled($state))
+                    ->required(fn(string $context) => $context === 'create'),
 
                 Select::make('roles')
                     ->label('Roles')

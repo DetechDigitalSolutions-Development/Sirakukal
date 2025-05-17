@@ -1,3 +1,5 @@
+
+{{-- Volunteer Registration Form --}}
 <div x-data="{
     formData: {
         full_name: '',
@@ -22,7 +24,6 @@
 }" class="max-w-4xl mx-auto">
     <form id="volunteer-form" action="{{ route('volunteers.store') }}" method="POST" class="bg-white shadow-md rounded-lg p-6 md:p-8">
         @csrf
-        
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Volunteer Registration Form</h2>
         
         <div class="space-y-6">
