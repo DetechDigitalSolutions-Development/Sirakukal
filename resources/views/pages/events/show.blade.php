@@ -14,7 +14,7 @@
                     Back to Events
                 </a>
             </div>
-            
+         
             <!-- Event Details Card -->
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="md:flex">

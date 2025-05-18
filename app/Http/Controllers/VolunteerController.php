@@ -1,34 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use Carbon\Carbon;
-use App\Models\Event;
-use App\Models\Testimonial;
-use App\Models\SiteSetting;
-use App\Models\Volunteer;
-
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class VolunteerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-{
-    $today = Carbon::today(); // today as a Carbon date object
-
-    // Get all events from today onwards
-    $upcomingEvents = Event::where('date', '>=', $today)->orderBy('date')->get();
-    // Get all rows from testimonials table
-    $testimonials = Testimonial::all();
-    $eventCount = Event::count(); // Total number of events
-    $volunteersCount = Volunteer::count();
-    $join_form = SiteSetting::where('key','=','join_form_enabled');
-
-    return view('pages.home', compact('upcomingEvents','testimonials','join_form','volunteersCount','eventCount'));
-}
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
