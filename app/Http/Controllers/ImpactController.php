@@ -20,7 +20,29 @@ class ImpactController extends Controller
         $story = Story::all();
         $join_form = SiteSetting::where('key','=','join_form_enabled');
 
-        return view('pages.impact', compact('story','join_form','eventCount','volunteersCount'));
+        // Format the impact statistics for the view
+        $impactStats = $this->getImpactStats($volunteersCount, $eventCount);
+
+        return view('pages.impact', compact('story', 'join_form', 'impactStats'));
+    }
+
+    /**
+     * Get formatted impact statistics.
+     * 
+     * @param int $volunteersCount Number of volunteers
+     * @param int $eventCount Number of events
+     * @return array Formatted impact statistics
+     */
+    public function getImpactStats($volunteersCount = 0, $eventCount = 0)
+    {
+        // Estimate hours based on events and volunteers (adjust as needed)
+        $hoursEstimate = $eventCount * 5 * 5; // Assuming 5 volunteers per event, 5 hours per volunteer
+        
+        return [
+            'volunteers' => $volunteersCount > 0 ? number_format($volunteersCount) . '+' : '+',
+            'hours' => $hoursEstimate > 0 ? number_format($hoursEstimate) . '+' : '',
+            'events' => $eventCount > 0 ? number_format($eventCount) : ''
+        ];
     }
 
     /**

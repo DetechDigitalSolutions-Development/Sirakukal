@@ -8,7 +8,7 @@
                 
                 <!-- Right side content -->
                 <div class="md:w-1/2">
-                   
+                    <h2 class="text-3xl font-bold mb-6">About Our Mission</h2>
                     
                     <p class="text-gray-600 mb-4">
                         Founded in 2015, our NGO is dedicated to sustainable development and community empowerment across Sri Lanka. We work hand-in-hand with local partners to address critical needs in education, health, and environmental conservation. Our projects are designed to create lasting positive change, driven by the passion and commitment of our global community of volunteers.

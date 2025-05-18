@@ -11,7 +11,128 @@
     
     <!-- Smooth scroll behavior for anchor links -->
     <script>
+        // Store the scroll target in localStorage with proper cleanup
+        function setScrollTarget(target) {
+            // Clean up any old scroll targets first
+            cleanupScrollTargets();
+            
+            // Set new scroll target with timestamp
+            localStorage.setItem('sirakukal_scrollTarget', target);
+            localStorage.setItem('sirakukal_scrollTime', Date.now());
+        }
+        
+        // Cleanup function to prevent localStorage pollution
+        function cleanupScrollTargets() {
+            // Remove any old scroll targets (older than 1 minute)
+            const scrollTime = localStorage.getItem('sirakukal_scrollTime');
+            const now = Date.now();
+            
+            // Remove if older than 1 minute or doesn't exist
+            if (!scrollTime || (now - scrollTime > 60000)) {
+                localStorage.removeItem('sirakukal_scrollTarget');
+                localStorage.removeItem('sirakukal_scrollTime');
+            }
+            
+            // Also clean up any legacy items (from previous implementation)
+            localStorage.removeItem('scrollTarget');
+            localStorage.removeItem('scrollTime');
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM content loaded, initializing smooth scroll behavior');
+            
+            // Function to handle smooth scrolling with offset and enhanced animation
+            function smoothScrollToElement(element) {
+                if (!element) {
+                    console.log('No target element found for smooth scroll');
+                    return;
+                }
+                
+                console.log('Scrolling to element:', element);
+                
+                // Calculate position with offset to account for fixed header
+                const headerOffset = 80; // Adjust based on your header height
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                const startPosition = window.pageYOffset;
+                const distance = offsetPosition - startPosition;
+                
+                // Directly scroll if distance is very small
+                if (Math.abs(distance) < 10) {
+                    window.scrollTo(0, offsetPosition);
+                    return;
+                }
+                
+                console.log('Starting animation scroll, distance:', distance);
+                
+                // Use requestAnimationFrame for smoother animation
+                const duration = 800; // ms
+                let start = null;
+                
+                // Easing function for smooth deceleration
+                function easeOutQuart(t) {
+                    return 1 - Math.pow(1 - t, 4);
+                }
+                
+                function animateScroll(timestamp) {
+                    if (!start) start = timestamp;
+                    const elapsed = timestamp - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = easeOutQuart(progress);
+                    window.scrollTo(0, startPosition + distance * easeProgress);
+                    
+                    if (elapsed < duration) {
+                        window.requestAnimationFrame(animateScroll);
+                    } else {
+                        console.log('Animation completed');
+                    }
+                }
+                
+                window.requestAnimationFrame(animateScroll);
+            }
+            
+            // First check for a stored scroll target (for cross-page navigation)
+            // Run cleanup on page load
+            cleanupScrollTargets();
+            
+            const scrollTarget = localStorage.getItem('sirakukal_scrollTarget');
+            const scrollTime = localStorage.getItem('sirakukal_scrollTime');
+            const now = Date.now();
+            
+            // Only use targets that are recent (within last 3 seconds)
+            if (scrollTarget && scrollTime && (now - scrollTime < 3000)) {
+                console.log('Found scroll target in localStorage:', scrollTarget);
+                
+                // Use a longer delay for cross-page navigation
+                // This is critical for allowing the page to fully render
+                setTimeout(function() {
+                    const targetElement = document.querySelector(scrollTarget);
+                    if (targetElement) {
+                        console.log('Target element found, scrolling...');
+                        smoothScrollToElement(targetElement);
+                    } else {
+                        console.log('Target element not found in DOM');
+                    }
+                    
+                    // Clear the scroll target after use
+                    localStorage.removeItem('sirakukal_scrollTarget');
+                    localStorage.removeItem('sirakukal_scrollTime');
+                    cleanupScrollTargets(); // Ensure complete cleanup
+                }, 1000);
+            }
+            // Handle URL hash if present
+            else if (window.location.hash) {
+                console.log('Found hash in URL:', window.location.hash);
+                
+                setTimeout(function() {
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement) {
+                        smoothScrollToElement(targetElement);
+                    }
+                }, 800);
+            }
+            
+            // Handle same-page anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -20,15 +141,48 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Update URL hash without jumping
+                        smoothScrollToElement(targetElement);
                         history.pushState(null, null, targetId);
                     }
                 });
+            });
+
+            // Handle links with hash fragments from other pages
+            document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+                if (!anchor.getAttribute('href').startsWith('#')) {
+                    anchor.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        const hashIndex = href.indexOf('#');
+                        
+                        if (hashIndex !== -1) {
+                            const baseUrl = href.substring(0, hashIndex);
+                            const hash = href.substring(hashIndex);
+                            
+                            // Check if we're already on the target page
+                            const currentPath = window.location.pathname;
+                            const isCurrentPage = (
+                                currentPath === baseUrl ||
+                                currentPath + '/' === baseUrl || 
+                                '/' + currentPath === baseUrl
+                            );
+                            
+                            // If we're on the same page, prevent navigation and just scroll
+                            if (isCurrentPage) {
+                                e.preventDefault();
+                                
+                                const targetElement = document.querySelector(hash);
+                                if (targetElement) {
+                                    smoothScrollToElement(targetElement);
+                                    history.pushState(null, null, hash);
+                                }
+                            } else {
+                                // For cross-page navigation, set the target for the next page
+                                setScrollTarget(hash);
+                                console.log('Set scroll target for next page:', hash);
+                            }
+                        }
+                    });
+                }
             });
         });
     </script>
@@ -173,7 +327,7 @@
                         <a href="{{ route('events.index') }}" class="text-charcoal-black hover:text-flame-red font-medium">Events</a>
                         <a href="{{ route('aim') }}" class="text-charcoal-black hover:text-flame-red font-medium">Aim</a>
                         <a href="{{ route('impact') }}" class="text-charcoal-black hover:text-flame-red font-medium">Impact</a>
-                        <a href="{{ route('contact') }}" class="text-charcoal-black hover:text-flame-red font-medium">Contact</a>
+                        <a href="{{ route('events.index') }}#contact" class="text-charcoal-black hover:text-flame-red font-medium">Contact</a>
                     </nav>
                 </div>
                 
@@ -212,7 +366,7 @@
                         <a href="{{ route('events.index') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Events</a>
                         <a href="{{ route('aim') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Aim</a>
                         <a href="{{ route('impact') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Impact</a>
-                        <a href="{{ route('contact') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Contact</a>
+                        <a href="{{ route('events.index') }}#contact" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Contact</a>
                     </nav>
                 </div>
             </div>
@@ -273,5 +427,8 @@
 
     <!-- Include the scroll buttons for quick navigation -->
     @include('components.ui.scroll-button')
+    
+    <!-- Stack for component scripts -->
+    @stack('scripts')
 </body>
 </html>
