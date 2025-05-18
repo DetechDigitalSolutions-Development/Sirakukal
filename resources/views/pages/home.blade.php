@@ -34,7 +34,7 @@
                 <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                @foreach($events ?? [] as $event)
+                @foreach($upcomingEvents ?? [] as $event)
                     @include('components.events.card', ['event' => $event])
                 @endforeach
             </div>

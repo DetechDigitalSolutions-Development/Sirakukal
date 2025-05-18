@@ -13,8 +13,10 @@ class Event extends Model
         'venue',
         'description',
         'image_url',
+        'type',
         'category',   
-        'link',       
+        'link',
+        'references',       
         
     ];
 }
