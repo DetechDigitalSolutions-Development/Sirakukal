@@ -30,7 +30,7 @@ class AnnouncementResource extends Resource
                 Textarea::make('description')->required()->maxLength(2000),
                 FileUpload::make('image_url')
                     ->image()
-                    ->directory('announcements')
+                    ->directory('announcements-images')
                     ->disk('public')
                     ->label('Author Image')
                     ->imageEditor()

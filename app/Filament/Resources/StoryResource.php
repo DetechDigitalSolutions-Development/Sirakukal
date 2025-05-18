@@ -30,7 +30,7 @@ class StoryResource extends Resource
                 Textarea::make('description')->required()->maxLength(2000),
                 FileUpload::make('image_url')
                     ->image()
-                    ->directory('stories')
+                    ->directory('stories-images')
                     ->disk('public')
                     ->label('Author Image')
                     ->imageEditor()
