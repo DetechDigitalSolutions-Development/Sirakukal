@@ -29,32 +29,23 @@
 </head>
 <body class="m-0 p-0 overflow-x-hidden">
 
-<section x-data="{
-    slides: [
-        {
-            image: '/images/image1.avif',
-            title: 'Empower Change Through Volunteering',
-            description: 'Join our community and make a real difference in the lives of others and the world around us.'
+<section 
+    x-data="{
+        slides: {{ Js::from($upcomingEvents->map(fn($event) => [
+            'image' => 'storage/'.$event->image_url,
+            'title' => $event->name,
+            'description' => $event->description,
+        ])) }},
+        currentIndex: 0,
+        next() {
+            this.currentIndex = (this.currentIndex + 1) % this.slides.length;
         },
-        {
-            image: '/images/image2.jpg',
-            title: 'Be the Light in Someone\'s Life',
-            description: 'Small acts of kindness can spark big changes. Join us and volunteer today.'
-        },
-        {
-            image: '/images/image3.webp',
-            title: 'Together We Can Make a Difference',
-            description: 'Work hand-in-hand with others to build a better, brighter future for everyone.'
+        startAutoSlide() {
+            setInterval(() => this.next(), 6000);
         }
-    ],
-    currentIndex: 0,
-    next() {
-        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    },
-    startAutoSlide() {
-        setInterval(() => this.next(), 6000);
-    }
-}" x-init="startAutoSlide()" class="relative h-[90vh] w-full overflow-hidden">
+    }"
+    x-init="startAutoSlide()" 
+    class="relative h-[90vh] w-full overflow-hidden">
 
   <!-- Slides container -->
   <div class="relative h-full w-full">
