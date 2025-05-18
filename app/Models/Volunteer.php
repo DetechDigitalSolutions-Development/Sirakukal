@@ -6,6 +6,49 @@ use Illuminate\Database\Eloquent\Model;
 
 class Volunteer extends Model
 {
+    const DISTRICTS = [
+        'Thirukonamalai' => 'Thirukonamalai',
+        'Mattakalappu' => 'Mattakalappu',
+        'Amparai' => 'Amparai',
+        'Nuwara Eliya' => 'Nuwara Eliya',
+        'Mullaitivu' => 'Mullaitivu',
+        'Vavuniya' => 'Vavuniya',
+        'Kilinochchi' => 'Kilinochchi',
+        'Yarlpannam' => 'Yarlpannam',
+        'Mannar' => 'Mannar',
+        'Kandy' => 'Kandy',
+        'Matale' => 'Matale',
+        'Puttalam' => 'Puttalam',
+        'Badulla' => 'Badulla',
+        'Kegalle' => 'Kegalle',
+        'Colombo' => 'Colombo',
+        'Gampaha' => 'Gampaha',
+        'Kalutara' => 'Kalutara',
+        'Kurunegala' => 'Kurunegala',
+        'Ratnapura' => 'Ratnapura',
+        'Polonnaruwa' => 'Polonnaruwa',
+        'Anuradhapura' => 'Anuradhapura',
+        'Monaragala' => 'Monaragala',
+        'Hambantota' => 'Hambantota',
+        'Matara' => 'Matara',
+        'Galle' => 'Galle',
+    ];
+
+    const EDUCATION_LEVELS = [
+        'School Leaver' => 'School Leaver',
+        'Undergraduate' => 'Undergraduate',
+        'Graduate' => 'Graduate',
+        'Professional' => 'Professional',
+        'Entrepreneur' => 'Entrepreneur',
+    ];
+
+    const HEARD_SOURCES = [
+        'Friends' => 'Friends',
+        'Social Media' => 'Social Media',
+        'Newspapers' => 'Newspapers',
+        'Others' => 'Others',
+    ];
+
     protected $fillable = [
     'volunteer_id',
     'full_name',

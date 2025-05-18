@@ -50,35 +50,11 @@ class VolunteerResource extends Resource
                 TextInput::make('initials_name')->label('Name with Initials'),
 
                 Select::make('district')
-                    ->options([
-                        'Thirukonamalai' => 'Thirukonamalai',
-                        'Mattakalappu' => 'Mattakalappu',
-                        'Amparai' => 'Amparai',
-                        'Nuwara Eliya' => 'Nuwara Eliya',
-                        'Mullaitivu' => 'Mullaitivu',
-                        'Vavuniya' => 'Vavuniya',
-                        'Kilinochchi' => 'Kilinochchi',
-                        'Yarlpannam' => 'Yarlpannam',
-                        'Mannar' => 'Mannar',
-                        'Kandy' => 'Kandy',
-                        'Matale' => 'Matale',
-                        'Puttalam' => 'Puttalam',
-                        'Badulla' => 'Badulla',
-                        'Kegalle' => 'Kegalle',
-                        'Colombo' => 'Colombo',
-                        'Gampaha' => 'Gampaha',
-                        'Kalutara' => 'Kalutara',
-                        'Kurunegala' => 'Kurunegala',
-                        'Ratnapura' => 'Ratnapura',
-                        'Polonnaruwa' => 'Polonnaruwa',
-                        'Anuradhapura' => 'Anuradhapura',
-                        'Monaragala' => 'Monaragala',
-                        'Hambantota' => 'Hambantota',
-                        'Matara' => 'Matara',
-                        'Galle' => 'Galle',
-                    ])
-
-                    ->required(),
+                    ->label('District')
+                    ->options(Volunteer::DISTRICTS)
+                    ->placeholder('Select your District')
+                    ->required()
+                    ->searchable(),
                 TextInput::make('address')->label('Home Address')->required(),
                 TextInput::make('nic_number')->label('NIC Number')->nullable(),
 
@@ -86,13 +62,8 @@ class VolunteerResource extends Resource
                 DatePicker::make('joined_date')->label('Date')->nullable(),
 
                 Select::make('status')
-                    ->options([
-                        'School Leaver' => 'School Leaver',
-                        'Undergraduate' => 'Undergraduate',
-                        'Graduate' => 'Graduate',
-                        'Professional' => 'Professional',
-                        'Entrepreneur' => 'Entrepreneur',
-                    ])
+                    ->options(Volunteer::EDUCATION_LEVELS)
+                    ->placeholder('Select Education Level')
                     ->required()
                     ->label('Are you?'),
 
@@ -104,12 +75,8 @@ class VolunteerResource extends Resource
 
                 Select::make('referred_by')
                     ->label('How did you know about Sirakukal?')
-                    ->options([
-                        'Friends' => 'Friends',
-                        'Social Media' => 'Social Media',
-                        'Newspapers' => 'Newspapers',
-                        'Others' => 'Others',
-                    ])
+                    ->options(Volunteer::HEARD_SOURCES)
+                    ->placeholder('Select Source')
                     ->required(),
 
                 Textarea::make('reason_to_join')->label('Why do you want to join Sirakukal?')->required(),
@@ -137,50 +104,15 @@ class VolunteerResource extends Resource
             ->filters([
                 Tables\Filters\TernaryFilter::make('joined')->label('Joined Status'),
                 Tables\Filters\SelectFilter::make('status')
-                    ->options([
-                        'School Leaver' => 'School Leaver',
-                        'Undergraduate' => 'Undergraduate',
-                        'Graduate' => 'Graduate',
-                        'Professional' => 'Professional',
-                        'Entrepreneur' => 'Entrepreneur',
-                    ]),
+                    ->options(Volunteer::EDUCATION_LEVELS),
+
                 Tables\Filters\SelectFilter::make('district')
                     ->label('District')
-                    ->options([
-                        'Thirukonamalai' => 'Thirukonamalai',
-                        'Mattakalappu' => 'Mattakalappu',
-                        'Amparai' => 'Amparai',
-                        'Nuwara Eliya' => 'Nuwara Eliya',
-                        'Mullaitivu' => 'Mullaitivu',
-                        'Vavuniya' => 'Vavuniya',
-                        'Kilinochchi' => 'Kilinochchi',
-                        'Yarlpannam' => 'Yarlpannam',
-                        'Mannar' => 'Mannar',
-                        'Kandy' => 'Kandy',
-                        'Matale' => 'Matale',
-                        'Puttalam' => 'Puttalam',
-                        'Badulla' => 'Badulla',
-                        'Kegalle' => 'Kegalle',
-                        'Colombo' => 'Colombo',
-                        'Gampaha' => 'Gampaha',
-                        'Kalutara' => 'Kalutara',
-                        'Kurunegala' => 'Kurunegala',
-                        'Ratnapura' => 'Ratnapura',
-                        'Polonnaruwa' => 'Polonnaruwa',
-                        'Anuradhapura' => 'Anuradhapura',
-                        'Monaragala' => 'Monaragala',
-                        'Hambantota' => 'Hambantota',
-                        'Matara' => 'Matara',
-                        'Galle' => 'Galle',
-                    ]),
+                   ->options(Volunteer::DISTRICTS),
+
                 Tables\Filters\SelectFilter::make('how_found_sirakukal')
                     ->label('How Found Sirakukal')
-                    ->options([
-                        'Friends' => 'Friends',
-                        'Social Media' => 'Social Media',
-                        'Newspapers' => 'Newspapers',
-                        'Others' => 'Others',
-                    ]),
+                    ->options(Volunteer::HEARD_SOURCES),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
