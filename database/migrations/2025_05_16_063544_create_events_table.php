@@ -18,8 +18,10 @@ return new class extends Migration
             $table->time('time');
             $table->string('venue');
             $table->text('description')->nullable();
-            $table->string('category')->default('Physical');
+            $table->string('type')->nullable();
+            $table->string('category')->nullable();
             $table->string('link')->nullable();
+            $table->string('reference_links')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamps();
         });

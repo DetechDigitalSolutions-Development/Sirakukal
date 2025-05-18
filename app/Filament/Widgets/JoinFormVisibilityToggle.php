@@ -3,12 +3,15 @@ namespace App\Filament\Widgets;
 
 use App\Models\SiteSetting;
 use Filament\Widgets\Widget;
+use Livewire\Attributes\On; 
+use Livewire\Attributes\Reactive;
 
 class JoinFormVisibilityToggle extends Widget
 {
     protected static string $view = 'filament.widgets.join-form-visibility-toggle';
 
-    public bool $enabled;
+   
+    public bool $enabled = false;
 
     public function mount(): void
     {
@@ -18,7 +21,9 @@ class JoinFormVisibilityToggle extends Widget
     public function toggle(): void
     {
         $this->enabled = !$this->enabled;
+
         SiteSetting::set('join_form_enabled', $this->enabled ? 'true' : 'false');
+
         $this->dispatch('banner', title: 'Join form ' . ($this->enabled ? 'enabled' : 'disabled'));
     }
 }

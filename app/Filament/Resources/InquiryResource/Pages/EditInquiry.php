@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MeetupResource\Pages;
+namespace App\Filament\Resources\InquiryResource\Pages;
 
-use App\Filament\Resources\MeetupResource;
+use App\Filament\Resources\InquiryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditMeetup extends EditRecord
+class EditInquiry extends EditRecord
 {
-    protected static string $resource = MeetupResource::class;
+    protected static string $resource = InquiryResource::class;
 
     protected function getHeaderActions(): array
     {

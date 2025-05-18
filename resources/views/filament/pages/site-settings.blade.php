@@ -1,3 +1,3 @@
 <x-filament::page>
-    <livewire:app.filament.widgets.join-form-visibility-toggle />
+    @livewire(\App\Filament\Widgets\JoinFormVisibilityToggle::class)
 </x-filament::page>

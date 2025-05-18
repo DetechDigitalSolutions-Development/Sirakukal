@@ -8,14 +8,10 @@ use Filament\Pages\Page;
 class SiteSettings extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static string $view = 'filament.pages.site-settings';
     protected static ?string $navigationGroup = 'Site Settings';
     protected static ?string $title = 'Site Settings';
 
-     public function getWidgets(): array
-    {
-        return [
-            JoinFormVisibilityToggle::class,
-        ];
-    }
+    protected static string $view = 'filament.pages.site-settings';
+
+    
 }

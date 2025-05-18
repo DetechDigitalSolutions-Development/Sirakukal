@@ -13,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\View;
@@ -38,6 +39,13 @@ class EventResource extends Resource
                     ->required()
                     ->maxLength(255),
 
+                Select::make('category')
+                    ->label('Category')
+                    ->options([
+                        Event::CATEGORY
+                    ])
+                    ->required(),
+
                 DatePicker::make('date')
                     ->label('Date')
                     ->required(),
@@ -51,11 +59,10 @@ class EventResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Select::make('category')
-                    ->label('Category')
+                Select::make('type')
+                    ->label('Type')
                     ->options([
-                        'Online' => 'Online',
-                        'Physical' => 'Physical',
+                        Event::TYPE
                     ])
                     ->required(),
 
@@ -65,7 +72,7 @@ class EventResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->label('Description')
                     ->nullable()
                     ->maxLength(1000),
@@ -77,9 +84,33 @@ class EventResource extends Resource
                     ->disk('public')
                     ->imageEditor()
                     ->preserveFilenames()
-                    ->enableDownload()
-                    ->enableOpen()
+                    ->downloadable()
+                    ->openable()
                     ->maxSize(2048),
+
+
+                FileUpload::make('reference_links')
+                    ->label('reference_links Document')
+                    ->multiple()
+                    ->directory('event-reference_links')
+                    ->disk('public')
+                    ->preserveFilenames()
+                    ->downloadable()
+                    ->openable()
+                    //->maxSize(2048) 
+                    ->acceptedFileTypes([
+                        'application/pdf',
+                        'application/msword',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'image/jpeg',
+                        'image/png',
+                    ])
+                    ->helperText('Allowed types: PDF, DOC, DOCX, JPG, PNG')  //Max size: 2MB.
+                    ->columnSpanFull()
+                    ->disablePreview()
+                    ->imageResizeTargetWidth(1200)
+                    ->imageResizeTargetHeight(1200)
+                    ->imageResizeMode('cover')
             ]);
     }
 
@@ -96,8 +127,14 @@ class EventResource extends Resource
                 TextColumn::make('date')->date()->sortable(),
                 TextColumn::make('time')->time()->sortable(),
                 TextColumn::make('venue')->sortable()->searchable(),
+                TextColumn::make('description')->limit(50)->sortable(),
+                TextColumn::make('type')->sortable(),
                 TextColumn::make('category')->sortable(),
                 TextColumn::make('link')->url(fn($record) => $record->link)->label('Event Link')->limit(30)->openUrlInNewTab(true),
+                Tables\Columns\ViewColumn::make('reference_links')
+                    ->label('Reference Files')
+                    ->view('tables.columns.reference-links'),
+
                 TextColumn::make('created_at')->dateTime()->label('Created At'),
             ])
             ->filters([])
