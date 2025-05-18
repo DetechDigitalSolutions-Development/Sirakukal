@@ -13,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\View;
 use Filament\Tables\Columns\TextColumn;
@@ -21,11 +22,12 @@ class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
 
-    protected static ?int $navigationSort = 3;
+    //protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
-    //protected static ?string $navigationGroup = 'Event Management';
+    protected static ?string $navigationGroup = 'Programs';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -46,6 +48,20 @@ class EventResource extends Resource
 
                 TextInput::make('venue')
                     ->label('Venue')
+                    ->required()
+                    ->maxLength(255),
+
+                Select::make('category')
+                    ->label('Category')
+                    ->options([
+                        'Online' => 'Online',
+                        'Physical' => 'Physical',
+                    ])
+                    ->required(),
+
+                TextInput::make('link')
+                    ->label('Event Link')
+                    ->url()
                     ->required()
                     ->maxLength(255),
 
@@ -80,6 +96,8 @@ class EventResource extends Resource
                 TextColumn::make('date')->date()->sortable(),
                 TextColumn::make('time')->time()->sortable(),
                 TextColumn::make('venue')->sortable()->searchable(),
+                TextColumn::make('category')->sortable(),
+                TextColumn::make('link')->url(fn($record) => $record->link)->label('Event Link')->limit(30)->openUrlInNewTab(true),
                 TextColumn::make('created_at')->dateTime()->label('Created At'),
             ])
             ->filters([])

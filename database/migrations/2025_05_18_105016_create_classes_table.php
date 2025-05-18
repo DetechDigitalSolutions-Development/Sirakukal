@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->date('date');
             $table->time('time');
             $table->string('venue');
             $table->text('description')->nullable();
-            $table->string('category')->default('Physical');
-            $table->string('link')->nullable();
+            $table->string('category')->default('Physical'); // Online / Physical
+            $table->string('link')->nullable(); // for Zoom/Form
             $table->string('image_url')->nullable();
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('classes');
     }
 };

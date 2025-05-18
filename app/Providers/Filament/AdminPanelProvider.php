@@ -19,11 +19,13 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 use App\Filament\Pages\Dashboard;
+use App\Filament\Pages\SiteSettings;
 use App\Filament\Widgets\VolunteerStatsWidget;
 use App\Filament\Widgets\EventStatsWidget;
 use App\Filament\Widgets\RecentVolunteerActivity;
 use App\Filament\Widgets\UpcomingEvents;
 use App\Filament\Widgets\SignupsOverTime;
+use App\Models\SiteSetting;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -37,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Sirakukal Admin')
-            ->brandLogo(fn() => asset('images/logo.svg')) // Add your logo
+            ->brandLogo(fn() => asset('images/Logo (1).PNG')) // Add your logo
             ->colors([
                 'primary' =>  "#D72638",
             ])
@@ -51,6 +53,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,
+                SiteSettings::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             

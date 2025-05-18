@@ -16,7 +16,7 @@ class EventSeeder extends Seeder
                 'time' => '09:00:00',
                 'venue' => 'Galle Face Green',
                 'description' => 'Join us in cleaning up the coastal area to protect marine life.',
-                'image_url' => 'https://via.placeholder.com/640x480?text=Cleanup+Event',
+                'image_url' => '',
             ],
             [
                 'name' => 'Health Camp',
@@ -24,7 +24,7 @@ class EventSeeder extends Seeder
                 'time' => '10:00:00',
                 'venue' => 'Batticaloa General Hospital',
                 'description' => 'A free medical camp to assist rural communities.',
-                'image_url' => 'https://via.placeholder.com/640x480?text=Health+Camp',
+                'image_url' => '',
             ],
             // Add more as needed...
         ];
