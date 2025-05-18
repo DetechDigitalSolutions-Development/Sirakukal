@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Testimonial;
 use App\Models\SiteSetting;
 use App\Models\Volunteer;
+use App\Http\Controllers\ImpactController;
 
 
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ImpactController $impactController)
 {
     $today = Carbon::today(); // today as a Carbon date object
 
@@ -27,7 +28,10 @@ class HomeController extends Controller
     $volunteersCount = Volunteer::count();
     $join_form = SiteSetting::where('key','=','join_form_enabled');
 
-    return view('pages.home', compact('upcomingEvents','testimonials','join_form','volunteersCount','eventCount'));
+    // Format the impact statistics for the view
+    $impactStats = $impactController->getImpactStats($volunteersCount, $eventCount);
+
+    return view('pages.home', compact('upcomingEvents','testimonials','join_form','volunteersCount','eventCount','impactStats'));
 }
 
     /**

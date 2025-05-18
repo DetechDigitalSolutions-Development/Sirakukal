@@ -236,7 +236,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="py-16 bg-white">
+    <section id="contact" class="py-16 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold mb-4">Still Have Questions?</h2>
