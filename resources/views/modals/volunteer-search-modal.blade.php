@@ -40,14 +40,14 @@
                                 Search for volunteer information by name or NIC number.
                             </p>
                             
-                            <form @submit.prevent="searchVolunteer()" class="space-y-4">
+                            <form @submit.prevent="searchVolunteer" class="space-y-4">
                                 <!-- Search by Name -->
                                 <div>
                                     <label for="modal-search-name" class="block text-sm font-medium text-gray-700">Name</label>
                                     <input 
                                         type="text" 
                                         id="modal-search-name" 
-                                        x-model="name"
+                                        x-model="searchName"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                                         placeholder="Enter volunteer name"
                                     >
@@ -63,7 +63,7 @@
                                     <input 
                                         type="text" 
                                         id="modal-search-nic" 
-                                        x-model="nic"
+                                        x-model="searchNic"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                                         placeholder="Enter NIC number (e.g. 123456789V)"
                                     >
@@ -73,71 +73,64 @@
                                     <button
                                         type="submit"
                                         class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:text-sm"
-                                        :disabled="searching"
+                                        :disabled="isSearching"
                                     >
-                                        <span x-show="!searching">Search</span>
-                                        <span x-show="searching" class="inline-flex items-center">
-                                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            Searching...
-                                        </span>
+                                        <span x-show="!isSearching">Search</span>
+                                        <span x-show="isSearching">Searching...</span>
                                     </button>
                                 </div>
                             </form>
 
                             <!-- Search Results Section -->
-                            <template x-if="searchComplete">
-                                <div class="mt-6">
-                                    <template x-if="volunteer">
-                                        <div class="bg-green-50 p-4 rounded-md border border-green-200 animate-fadeIn">
-                                            <div class="flex items-center mb-3">
-                                                <div class="rounded-full bg-green-100 p-1 mr-2">
-                                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
-                                                </div>
-                                                <h4 class="text-base font-semibold text-gray-800">Volunteer Found</h4>
+                            <div class="mt-6" x-show="searchPerformed">
+                                <template x-if="volunteer">
+                                    <div class="bg-green-50 p-4 rounded-md border border-green-200 animate-fadeIn">
+                                        <div class="flex items-center mb-3">
+                                            <div class="rounded-full bg-green-100 p-1 mr-2">
+                                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
                                             </div>
-                                            
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm mb-3">
-                                                <div>
-                                                    <p class="text-xs text-gray-600">Volunteer ID</p>
-                                                    <p class="font-medium" x-text="volunteer.id"></p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xs text-gray-600">Name</p>
-                                                    <p class="font-medium" x-text="volunteer.name"></p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xs text-gray-600">NIC Number</p>
-                                                    <p class="font-medium" x-text="volunteer.nic"></p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xs text-gray-600">Status</p>
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" x-text="volunteer.status"></span>
-                                                </div>
+                                            <h4 class="text-base font-semibold text-gray-800">Volunteer Found</h4>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm mb-3">
+                                            <div>
+                                                <p class="text-xs text-gray-600">Volunteer ID</p>
+                                                <p class="font-medium" x-text="volunteer.id"></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-600">Name</p>
+                                                <p class="font-medium" x-text="volunteer.name"></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-600">NIC Number</p>
+                                                <p class="font-medium" x-text="volunteer.nic"></p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-600">Status</p>
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" x-text="volunteer.status"></span>
                                             </div>
                                         </div>
-                                    </template>
-                                    <template x-if="!volunteer">
-                                        <div class="bg-yellow-50 p-4 rounded-md border border-yellow-200 animate-fadeIn">
-                                            <div class="flex items-center">
-                                                <div class="rounded-full bg-yellow-100 p-1 mr-2">
-                                                    <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                    </svg>
-                                                </div>
-                                                <div>
-                                                    <h4 class="text-base font-semibold text-gray-800">No Results Found</h4>
-                                                    <p class="text-xs text-gray-600 mt-1">No volunteer records match your search criteria.</p>
-                                                </div>
+                                    </div>
+                                </template>
+                                
+                                <template x-if="!volunteer && searchPerformed">
+                                    <div class="bg-yellow-50 p-4 rounded-md border border-yellow-200 animate-fadeIn">
+                                        <div class="flex items-center">
+                                            <div class="rounded-full bg-yellow-100 p-1 mr-2">
+                                                <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-base font-semibold text-gray-800">No Results Found</h4>
+                                                <p class="text-xs text-gray-600 mt-1">No volunteer records match your search criteria.</p>
                                             </div>
                                         </div>
-                                    </template>
-                                </div>
-                            </template>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,41 +152,35 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('volunteerSearchModal', () => ({
             open: false,
+            searchName: '',
+            searchNic: '',
             volunteer: null,
-            name: '',
-            nic: '',
-            searching: false,
-            searchComplete: false,
-            
-            searchVolunteer() {
-                if (!this.name && !this.nic) {
-                    alert('Please enter a name or NIC number');
-                    return;
+            searchPerformed: false,
+            isSearching: false,
+
+            async searchVolunteer() {
+                this.isSearching = true;
+                this.searchPerformed = false;
+                this.volunteer = null;
+
+                try {
+                    const response = await fetch(`/volunteer/search?${new URLSearchParams({
+                        name: this.searchName,
+                        nic: this.searchNic
+                    })}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    const data = await response.json();
+                    this.volunteer = data.volunteer;
+                    this.searchPerformed = true;
+                } catch (error) {
+                    console.error('Search failed:', error);
+                } finally {
+                    this.isSearching = false;
                 }
-                
-                this.searching = true;
-                this.searchComplete = false;
-                
-                // Simulate API request with timeout
-                setTimeout(() => {
-                    // Mock volunteer data
-                    if (this.name || this.nic) {
-                        this.volunteer = {
-                            id: 'VOL-123456',
-                            name: this.name || 'John Doe',
-                            nic: this.nic || '123456789V',
-                            phone: '+94 77 1234567',
-                            email: 'john.doe@example.com',
-                            registration_date: '2025-03-17',
-                            status: 'Active'
-                        };
-                    } else {
-                        this.volunteer = null;
-                    }
-                    
-                    this.searching = false;
-                    this.searchComplete = true;
-                }, 1000);
             }
         }));
     });

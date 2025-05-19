@@ -194,6 +194,7 @@
     
     <!-- Custom styles for brand colors -->
     <style>
+        [x-cloak] { display: none !important; }
         :root {
             /* Brand Colors */
             --flame-red: #D72638;
@@ -346,7 +347,9 @@
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
-                        <div x-show="open" @click.away="open = false" 
+                        <div x-show="open" 
+                             x-cloak
+                             @click.away="open = false"
                              x-transition:enter="transition ease-out duration-100" 
                              x-transition:enter-start="opacity-0 transform scale-95" 
                              x-transition:enter-end="opacity-100 transform scale-100" 

@@ -145,9 +145,11 @@
                                 Register via Google Form
                             </a>
                         </div>
-                        @else
+                        @endif
+
                         <!-- Built-in Registration Form -->
-                        <form>
+                        <form id="registrationForm" onsubmit="sendWhatsAppMessage(event)">
+                            @csrf
                             <div class="mb-4">
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
                                 <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" required>
@@ -170,10 +172,34 @@
                             </div>
                             
                             <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition-colors duration-200">
-                                Register Now
+                                Register via WhatsApp
                             </button>
                         </form>
-                        @endif
+
+                        <script>
+                            function sendWhatsAppMessage(event) {
+                                event.preventDefault();
+                                
+                                const name = document.getElementById('name').value;
+                                const email = document.getElementById('email').value;
+                                const phone = document.getElementById('phone').value;
+                                const message = document.getElementById('message').value;
+                                const eventName = "{{ $event->name }}";
+                                
+                                const whatsappMessage = `*New Event Registration*\n\n` +
+                                    `*Event:* ${eventName}\n` +
+                                    `*Name:* ${name}\n` +
+                                    `*Email:* ${email}\n` +
+                                    `*Phone:* ${phone}\n` +
+                                    `*Additional Info:* ${message}`;
+                                
+                                const encodedMessage = encodeURIComponent(whatsappMessage);
+                                const whatsappNumber = "94712345678"; // Replace with your actual WhatsApp number
+                                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                                
+                                window.open(whatsappUrl, '_blank');
+                            }
+                        </script>
                         
                         <!-- Contact Information -->
                         <div class="mt-8 pt-6 border-t border-gray-200">
