@@ -432,6 +432,9 @@
     <!-- Include the scroll buttons for quick navigation -->
     @include('components.ui.scroll-button')
     
+    <!-- Include the WhatsApp button for quick contact -->
+    @include('components.ui.whatsapp-button', ['phoneNumber' => '919876543210'])
+    
     <!-- Stack for component scripts -->
     @stack('scripts')
 </body>
