@@ -51,7 +51,7 @@
         }
     }"
     x-init="startAutoSlide()" 
-    class="relative h-[90vh] w-full overflow-hidden">
+    class="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
 
   <!-- Slides container -->
   <div class="relative h-full w-full">

@@ -231,9 +231,21 @@ Route::prefix('events')->name('events.')->group(function () {
 //     })->name('search.submit');
 // });
 
-// Legacy route for compatibility
+// Volunteer Search Route
 Route::get('/volunteer/search', function () {
-    return redirect()->route('volunteers.verify', request()->query());
+    $volunteer = \App\Helpers\VolunteerHelper::searchVolunteer(
+        request('nic'),
+        request('name')
+    );
+    
+    if (request()->ajax()) {
+        return response()->json(['volunteer' => $volunteer]);
+    }
+    
+    return view('modals.volunteer-search-modal', [
+        'volunteer' => $volunteer,
+        'searchPerformed' => true
+    ]);
 })->name('volunteer.search');
 
 /* Localization routes - Commented out until proper backend setup is ready
