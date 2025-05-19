@@ -29,22 +29,97 @@
                             <input type="hidden" name="type" value="{{ $activeType }}">
                         @endif
                         
-                        <!-- Location Filter -->
-                        <div class="mb-6">
-                            <h4 class="font-medium mb-2">Location</h4>
-                            <select name="location" id="location-filter" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
-                                <option value="">Any Location</option>
+                        <!-- Location Filter - Searchable Dropdown (like district search) -->
+                        <div class="mb-6" x-data="{ 
+                            locationSearch: '{{ $location ? $location . ' (' . $eventLocations[$location] . ')' : '' }}',
+                            showDropdown: false,
+                            selectedLocation: '{{ $location }}',
+                            locations: [
                                 @foreach($eventLocations as $city => $province)
-                                    <option value="{{ $city }}" {{ $location === $city ? 'selected' : '' }}>{{ $city }} ({{ $province }})</option>
+                                    {value: '{{ $city }}', label: '{{ $city }} ({{ $province }})'},
                                 @endforeach
-                            </select>
+                            ],
+                            filteredLocations() {
+                                if (!this.locationSearch) {
+                                    return this.locations;
+                                }
+                                return this.locations.filter(item => 
+                                    item.label.toLowerCase().includes(this.locationSearch.toLowerCase())
+                                );
+                            },
+                            selectLocation(value, label) {
+                                this.selectedLocation = value;
+                                this.locationSearch = value ? label : '';
+                                this.showDropdown = false;
+                            },
+                            clearLocation() {
+                                this.selectedLocation = '';
+                                this.locationSearch = '';
+                            }
+                        }">
+                            <h4 class="font-medium mb-2">Location</h4>
+                            <div class="relative">
+                                <input 
+                                    type="hidden" 
+                                    name="location" 
+                                    :value="selectedLocation">
+                                <div class="relative flex items-center">
+                                    <input 
+                                        type="text" 
+                                        x-model="locationSearch"
+                                        @focus="showDropdown = true" 
+                                        @click.outside="showDropdown = false"
+                                        @input="showDropdown = true"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary pr-8" 
+                                        placeholder="Type to search locations"
+                                        autocomplete="off"
+                                    >
+                                    <button 
+                                        x-show="locationSearch && selectedLocation" 
+                                        @click.prevent="clearLocation()" 
+                                        type="button" 
+                                        class="absolute right-2 text-gray-500 hover:text-gray-700"
+                                    >
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div 
+                                    x-show="showDropdown" 
+                                    x-transition 
+                                    class="absolute z-50 w-full mt-1 bg-white shadow-lg rounded-md border border-gray-300 max-h-60 overflow-y-auto"
+                                >
+                                    <!-- Any Location option always at top -->
+                                    <div 
+                                        @click="selectLocation('', 'Any Location')" 
+                                        class="px-4 py-2 hover:bg-gray-100 cursor-pointer font-semibold border-b border-gray-100" 
+                                        :class="{'bg-gray-100': selectedLocation === ''}">
+                                        Any Location
+                                    </div>
+                                    <template x-for="location in filteredLocations()" :key="location.value">
+                                        <div 
+                                            @click="selectLocation(location.value, location.label)" 
+                                            class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                            :class="{'bg-gray-100': selectedLocation === location.value}" 
+                                            x-text="location.label">
+                                        </div>
+                                    </template>
+                                    <div 
+                                        x-show="filteredLocations().length === 0" 
+                                        class="px-4 py-2 text-gray-500 italic"
+                                    >
+                                        No matching locations
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <!-- Date Filter -->
+                        <!-- Date Filter - Regular Dropdown -->
                         <div class="mb-6">
                             <h4 class="font-medium mb-2">Date</h4>
-                            <select name="date_filter" id="date-filter" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
-                                <option value="">Any Date</option>
+                            <select name="date_filter" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="" {{ $dateFilter === '' ? 'selected' : '' }}>Any Date</option>
                                 <option value="today" {{ $dateFilter === 'today' ? 'selected' : '' }}>Today</option>
                                 <option value="tomorrow" {{ $dateFilter === 'tomorrow' ? 'selected' : '' }}>Tomorrow</option>
                                 <option value="this_week" {{ $dateFilter === 'this_week' ? 'selected' : '' }}>This Week</option>
@@ -53,11 +128,11 @@
                             </select>
                         </div>
                         
-                        <!-- Mode Filter -->
+                        <!-- Mode Filter - Regular Dropdown -->
                         <div class="mb-6">
                             <h4 class="font-medium mb-2">Mode</h4>
-                            <select name="mode" id="mode-filter" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
-                                <option value="">Any Mode</option>
+                            <select name="mode" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="" {{ !isset($mode) || $mode === '' ? 'selected' : '' }}>Any Mode</option>
                                 <option value="physical" {{ isset($mode) && $mode === 'physical' ? 'selected' : '' }}>Physical</option>
                                 <option value="online" {{ isset($mode) && $mode === 'online' ? 'selected' : '' }}>Online</option>
                             </select>
