@@ -106,7 +106,12 @@ Route::get('/about', [AboutusController::class, 'index'])->name('about');
 // Remove this route since we're using the prefixed group below
 Route::get('/aim', [AimController::class, 'index'])->name('aim');
 Route::get('/impact', [ImpactController::class, 'index'])->name('impact');
-Route::post('/events.index', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
+
+Route::prefix('volunteers')->group(function () {
+    Route::get('/volunteer', [VolunteerController::class, 'create'])->name('volunteers.volunteer');
+    Route::post('/', [VolunteerController::class, 'store'])->name('volunteers.store');
+});
 /**
  * Events Routes
  */
@@ -122,109 +127,109 @@ Route::prefix('events')->name('events.')->group(function () {
 /**
  * Volunteer Routes
  */
-Route::prefix('volunteers')->name('volunteers.')->group(function () {
-    // Main volunteer portal page
-    Route::get('/volunteer', function () {
-        return view('pages.volunteers.volunteer');
-    })->name('volunteer');
+// Route::prefix('volunteers')->name('volunteers.')->group(function () {
+//     // Main volunteer portal page
+//     Route::get('/volunteer', function () {
+//         return view('pages.volunteers.volunteer');
+//     })->name('volunteer');
     
-    // Keep original register route for backward compatibility
-    Route::get('/register', function () {
-        return view('pages.volunteers.volunteer');
-    })->name('register');
+//     // Keep original register route for backward compatibility
+//     Route::get('/register', function () {
+//         return view('pages.volunteers.volunteer');
+//     })->name('register');
     
-    // Handle form submissions
-    Route::post('/volunteer', function () {
-        // In a real application, we would validate and store the volunteer
-        // Since this is mock data, we'll just create a success message
-        // and ensure we're accessing all the fields from the form
-        $requiredFields = [
-            'full_name', 'initials_name', 'district', 'address', 'nic_number',
-            'date_of_birth', 'phone', 'email', 'referred_by', 'reason_to_join'
-        ];
+//     // Handle form submissions
+//     Route::post('/volunteer', function () {
+//         // In a real application, we would validate and store the volunteer
+//         // Since this is mock data, we'll just create a success message
+//         // and ensure we're accessing all the fields from the form
+//         $requiredFields = [
+//             'full_name', 'initials_name', 'district', 'address', 'nic_number',
+//             'date_of_birth', 'phone', 'email', 'referred_by', 'reason_to_join'
+//         ];
         
-        // Check if all required fields are present
-        foreach ($requiredFields as $field) {
-            if (!request()->has($field)) {
-                return redirect()->back()->withErrors([
-                    $field => 'The ' . str_replace('_', ' ', $field) . ' field is required.'
-                ])->withInput();
-            }
-        }
+//         // Check if all required fields are present
+//         foreach ($requiredFields as $field) {
+//             if (!request()->has($field)) {
+//                 return redirect()->back()->withErrors([
+//                     $field => 'The ' . str_replace('_', ' ', $field) . ' field is required.'
+//                 ])->withInput();
+//             }
+//         }
         
-        // Check NIC format (old 9 digits + V/X or new 12 digits)
-        $nic = request('nic_number');
-        $validNic = (preg_match('/^\d{9}[VvXx]$/', $nic) || preg_match('/^\d{12}$/', $nic));
+//         // Check NIC format (old 9 digits + V/X or new 12 digits)
+//         $nic = request('nic_number');
+//         $validNic = (preg_match('/^\d{9}[VvXx]$/', $nic) || preg_match('/^\d{12}$/', $nic));
         
-        if (!$validNic) {
-            return redirect()->back()->withErrors([
-                'nic_number' => 'Please enter a valid NIC number (9 digits + V/X or 12 digits).'
-            ])->withInput();
-        }
+//         if (!$validNic) {
+//             return redirect()->back()->withErrors([
+//                 'nic_number' => 'Please enter a valid NIC number (9 digits + V/X or 12 digits).'
+//             ])->withInput();
+//         }
         
-        // Mock volunteer creation - in a real app this would be saved to database
-        $volunteer = getMockVolunteer(request('nic_number'));
+//         // Mock volunteer creation - in a real app this would be saved to database
+//         $volunteer = getMockVolunteer(request('nic_number'));
         
-        return redirect()->back()->with([
-            'success' => 'Your volunteer registration has been submitted successfully. Thank you!',
-            'volunteer' => $volunteer
-        ]);
-    })->name('volunteer.store');
+//         return redirect()->back()->with([
+//             'success' => 'Your volunteer registration has been submitted successfully. Thank you!',
+//             'volunteer' => $volunteer
+//         ]);
+//     })->name('volunteer.store');
     
-    Route::post('/register', function () {
-        // Redirect to the main volunteer handler
-        return redirect()->route('volunteers.volunteer.store', request()->all());
-    })->name('store');
+//     Route::post('/register', function () {
+//         // Redirect to the main volunteer handler
+//         return redirect()->route('volunteers.volunteer.store', request()->all());
+//     })->name('store');
     
-    // Volunteer search routes
-    Route::get('/search', function () {
-        // Handle both name and NIC search with mock data
-        $volunteer = null;
-        $name = request('name');
-        $nic = request('nic');
+//     // Volunteer search routes
+//     Route::get('/search', function () {
+//         // Handle both name and NIC search with mock data
+//         $volunteer = null;
+//         $name = request('name');
+//         $nic = request('nic');
         
-        if ($name || $nic) {
-            // Get mock volunteer with custom data based on search inputs
-            $volunteer = (object) [
-                'id' => 'VOL-123456',
-                'name' => $name ?: 'John Doe',
-                'nic' => $nic ?: '123456789V',
-                'phone' => '+94 77 1234567',
-                'email' => 'john.doe@example.com',
-                'registration_date' => now()->subMonths(2),
-                'created_at' => now()->subMonths(3),
-                'status' => 'Active'
-            ];
-        }
+//         if ($name || $nic) {
+//             // Get mock volunteer with custom data based on search inputs
+//             $volunteer = (object) [
+//                 'id' => 'VOL-123456',
+//                 'name' => $name ?: 'John Doe',
+//                 'nic' => $nic ?: '123456789V',
+//                 'phone' => '+94 77 1234567',
+//                 'email' => 'john.doe@example.com',
+//                 'registration_date' => now()->subMonths(2),
+//                 'created_at' => now()->subMonths(3),
+//                 'status' => 'Active'
+//             ];
+//         }
         
-        return view('pages.volunteers.search', [
-            'volunteer' => $volunteer
-        ]);
-    })->name('search');
+//         return view('pages.volunteers.search', [
+//             'volunteer' => $volunteer
+//         ]);
+//     })->name('search');
     
-    Route::get('/verify', function () {
-        $nic = request('nic');
-        $volunteer = null;
+//     Route::get('/verify', function () {
+//         $nic = request('nic');
+//         $volunteer = null;
         
-        if ($nic) {
-            $volunteer = getMockVolunteer($nic);
-        }
+//         if ($nic) {
+//             $volunteer = getMockVolunteer($nic);
+//         }
         
-        if (request()->wantsJson()) {
-            return response()->json(['volunteer' => $volunteer]);
-        }
+//         if (request()->wantsJson()) {
+//             return response()->json(['volunteer' => $volunteer]);
+//         }
         
-        return view('pages.volunteers.volunteer', [
-            'volunteer' => $volunteer,
-            'activeTab' => 'verify'
-        ]);
-    })->name('verify');
+//         return view('pages.volunteers.volunteer', [
+//             'volunteer' => $volunteer,
+//             'activeTab' => 'verify'
+//         ]);
+//     })->name('verify');
     
-    Route::post('/search', function () {
-        $volunteer = getMockVolunteer();
-        return redirect()->back()->with('volunteer', $volunteer);
-    })->name('search.submit');
-});
+//     Route::post('/search', function () {
+//         $volunteer = getMockVolunteer();
+//         return redirect()->back()->with('volunteer', $volunteer);
+//     })->name('search.submit');
+// });
 
 // Legacy route for compatibility
 Route::get('/volunteer/search', function () {

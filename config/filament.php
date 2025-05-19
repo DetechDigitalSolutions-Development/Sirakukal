@@ -30,6 +30,7 @@ return [
         // ],
 
     ],
+    'name' => env('APP_NAME'),
 
     'brand' => [
         'logo' => env('APP_URL') . '/images/Logo (1).png',

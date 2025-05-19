@@ -61,24 +61,28 @@ class Volunteer extends Model
         'Online' => 'Online',
     ];
 
+    const STATUS =[
+        'Working' => 'Working',
+        'Studying' => 'Studying',
+        'Leaving School' => 'Leaving School',
+    ];
+
     protected $fillable = [
-    'volunteer_id',
-    'full_name',
-    'initials_name',
-    'district',
-    'address',
-    'nic_number',
-    'date_of_birth',
-    'joined_date',
-    'status',
-    'institution',
-    'email',
-    'phone',
-    'whatsapp',
-    'referred_by',
-    'reason_to_join',
-    'joined',
-];
+        'full_name',
+        'initials_name',
+        'district',
+        'address',
+        'nic_number',
+        'date_of_birth',
+        'joined_date',
+        'status',
+        'institution',
+        'email',
+        'phone',
+        'whatsapp',
+        'referred_by',
+        'reason_to_join',
+    ];
 
 
     protected $casts = [
