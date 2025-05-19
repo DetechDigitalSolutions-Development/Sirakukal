@@ -358,20 +358,34 @@
                 
                 <!-- Contact Form -->
                 <div class="md:w-2/3">
-                    <form class="bg-white rounded-lg shadow-sm p-6">
-                        <div class="mb-6">
-                            <label for="full_name" class="block text-sm font-medium text-gray-700 mb-1">Full name</label>
-                            <input type="text" id="full_name" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your full name">
+                    @if(session('success'))
+                        <div class="mb-4 p-4 bg-green-100 text-green-800 rounded-md">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('contact.submit') }}" class="bg-white rounded-lg shadow-sm p-6">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First name</label>
+                                <input type="text" name="first_name" id="first_name" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your first name">
+                            </div>
+                            
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Last name</label>
+                                <input type="text" name="last_name" id="last_name" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your last name">
+                            </div>
+
                         </div>
                         
                         <div class="mb-6">
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" id="email" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your email address">
+                            <input type="email" name="email" id="email" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your email address">
                         </div>
                         
                         <div class="mb-6">
                             <label for="message" class="block text-sm font-medium text-gray-700 mb-1">How can we help?</label>
-                            <textarea id="message" rows="4" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Please share what you want us to help with"></textarea>
+                            <textarea id="message" name="message" rows="4" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Please share what you want us to help with"></textarea>
                         </div>
                         
                         <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 px-4 rounded-md transition-colors duration-300">

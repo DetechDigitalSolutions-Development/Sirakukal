@@ -20,15 +20,15 @@ class InquiryResource extends Resource
     protected static ?string $navigationGroup = 'Site Management';
 
     public static function getNavigationBadge(): ?string
-{
-    $count = Inquiry::where('read', false)->count();
-    return $count > 0 ? (string) $count : null;
-}
+    {
+        $count = Inquiry::where('read', false)->count();
+        return $count > 0 ? (string) $count : null;
+    }
 
-public static function getNavigationBadgeColor(): string | null
-{
-    return 'danger';
-}
+    public static function getNavigationBadgeColor(): string | null
+    {
+        return 'danger';
+    }
 
 
     public static function form(Form $form): Form
@@ -51,6 +51,7 @@ public static function getNavigationBadgeColor(): string | null
                 BooleanColumn::make('read')->label('Read'),
                 TextColumn::make('created_at')->since()->label('Received'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 Action::make('mark_read')
                     ->label('Mark as Read')

@@ -106,7 +106,7 @@ Route::get('/about', [AboutusController::class, 'index'])->name('about');
 // Remove this route since we're using the prefixed group below
 Route::get('/aim', [AimController::class, 'index'])->name('aim');
 Route::get('/impact', [ImpactController::class, 'index'])->name('impact');
-// Route::get('/contact', [EventsController::class, 'index'])->name('contact');
+Route::post('/events.index', [ContactController::class, 'submit'])->name('contact.submit');
 /**
  * Events Routes
  */

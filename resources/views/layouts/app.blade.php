@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Sirakukal')</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/Logo (1).png') }}">
+    <!-- Or for .ico -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+
     @vite('resources/css/app.css')
     
     <!-- Alpine.js for interactive components -->
