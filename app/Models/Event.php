@@ -27,8 +27,7 @@ class Event extends Model
         'category',
         'type',
         'reference_links',   
-        'link',       
-        
+        'link',             
     ];
 
     protected $casts = [

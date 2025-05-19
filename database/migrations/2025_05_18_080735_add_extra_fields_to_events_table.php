@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            // $table->string('type')->nullable()->after('image_url');
-            // $table->string('category')->nullable()->after('type');
-            // $table->string('link')->nullable()->after('category');
-            // $table->string('references')->nullable()->after('link');
+            $table->string('type')->nullable()->after('image_url');// Online / Physical
+            $table->string('category')->nullable()->after('type');// Events /Competitions /Meetups /Classes
+            $table->string('link')->nullable()->after('category');
+            $table->string('references')->nullable()->after('link');
         });
     }
 

@@ -49,6 +49,18 @@ class Volunteer extends Model
         'Others' => 'Others',
     ];
 
+    const CATERGORY =[
+        'Competitions' => 'Competitions',
+        'Meetups' => 'Meetups',
+        'Events' => 'Events',
+        'Classes' => 'Classes',
+    ];
+
+    const TYPE =[
+        'Physical' => 'Physical',
+        'Online' => 'Online',
+    ];
+
     protected $fillable = [
     'volunteer_id',
     'full_name',

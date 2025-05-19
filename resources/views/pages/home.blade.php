@@ -34,7 +34,7 @@
                 <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                @foreach($events ?? [] as $event)
+                @foreach($upcomingEvents ?? [] as $event)
                     @include('components.events.card', ['event' => $event])
                 @endforeach
             </div>
@@ -50,9 +50,10 @@
                 <div class="h-1 w-20 bg-primary rounded mx-auto mt-4"></div>
             </div>
             @include('components.cms.impact-stats', [
-                'volunteers' => $impactStats['volunteers'] ?? '500+',
-                'hours' => $impactStats['hours'] ?? '10,000+',
-                'communities' => $impactStats['communities'] ?? '20+'
+                'volunteers' => $impactStats['volunteers'] ,
+                'hours' => $impactStats['hours'] ,
+                'events' => $impactStats['events'] ,
+                'eventsLabel' => 'Community Events Held'
             ])
         </div>
     </section>
