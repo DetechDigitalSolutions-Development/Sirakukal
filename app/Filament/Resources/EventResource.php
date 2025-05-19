@@ -41,9 +41,8 @@ class EventResource extends Resource
 
                 Select::make('category')
                     ->label('Category')
-                    ->options([
-                        Event::CATEGORY
-                    ])
+                    ->options(Event::CATEGORY)
+                    ->placeholder('Select Category')
                     ->required(),
 
                 DatePicker::make('date')
@@ -61,9 +60,7 @@ class EventResource extends Resource
 
                 Select::make('type')
                     ->label('Type')
-                    ->options([
-                        Event::TYPE
-                    ])
+                    ->options(Event::TYPE)
                     ->required(),
 
                 TextInput::make('link')
@@ -89,8 +86,8 @@ class EventResource extends Resource
                     ->maxSize(2048),
 
 
-                FileUpload::make('reference_links')
-                    ->label('reference_links Document')
+                FileUpload::make('references_links')
+                    ->label('References_links Document')
                     ->multiple()
                     ->directory('event-reference_links')
                     ->disk('public')
@@ -131,10 +128,7 @@ class EventResource extends Resource
                 TextColumn::make('type')->sortable(),
                 TextColumn::make('category')->sortable(),
                 TextColumn::make('link')->url(fn($record) => $record->link)->label('Event Link')->limit(30)->openUrlInNewTab(true),
-                Tables\Columns\ViewColumn::make('reference_links')
-                    ->label('Reference Files')
-                    ->view('tables.columns.reference-links'),
-
+                TextColumn::make('references_links')->label('Reference Files')->view('tables.columns.reference-links'),
                 TextColumn::make('created_at')->dateTime()->label('Created At'),
             ])
             ->filters([])
