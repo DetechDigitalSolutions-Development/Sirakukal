@@ -12,14 +12,14 @@ return new class extends Migration
             $table->string('type')->nullable()->after('image_url');// Online / Physical
             $table->string('category')->nullable()->after('type');// Events /Competitions /Meetups /Classes
             $table->string('link')->nullable()->after('category');
-            $table->string('references')->nullable()->after('link');
+            $table->string('references_links')->nullable()->after('link');
         });
     }
 
     public function down(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn(['type', 'category', 'link', 'references']);
+            $table->dropColumn(['type', 'category', 'link', 'references_links']);
         });
     }
 };

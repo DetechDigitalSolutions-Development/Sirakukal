@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Inquiry;
 
 class ContactController extends Controller
 {
@@ -12,6 +13,25 @@ class ContactController extends Controller
     public function index()
     {
         //
+    }
+
+    public function submit(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|email',
+            'message'    => 'required|string',
+        ]);
+
+        Inquiry::create([
+            'full_name'    => $request->first_name . ' ' . $request->last_name,
+            'email'        => $request->email,
+            'help_message' => $request->message,
+            'read'         => 0,
+        ]);
+
+        return back()->with('success', 'Your inquiry has been submitted successfully!');
     }
 
     /**
