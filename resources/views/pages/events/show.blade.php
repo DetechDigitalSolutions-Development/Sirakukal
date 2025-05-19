@@ -69,9 +69,9 @@
                             
                             <!-- Mode -->
                             <div class="flex items-center">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $event->mode === 'physical' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' }}">
-                                    <span class="mr-1.5 h-2 w-2 rounded-full {{ $event->mode === 'physical' ? 'bg-green-400' : 'bg-blue-400' }}"></span>
-                                    {{ ucfirst($event->mode ?? 'Physical') }}
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $event->type === 'Physical' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' }}">
+                                    <span class="mr-1.5 h-2 w-2 rounded-full {{ $event->type === 'Physical' ? 'bg-green-400' : 'bg-blue-400' }}"></span>
+                                    {{ ucfirst($event->type ?? 'Physical') }}
                                 </span>
                             </div>
                             
@@ -107,9 +107,10 @@
                         <h3 class="text-xl font-bold mb-4">Register for This Event</h3>
                         <p class="text-gray-600 mb-6">Please fill out the form below to secure your spot at this event.</p>
                         
+                        @if(isset($event->link) && $event->link)
                         <div class="mb-6">
                             <p class="text-sm text-gray-500 mb-2">Registration is handled through Google Forms</p>
-                            <a href="https://forms.gle/exampleFormUrl12345" target="_blank" class="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded inline-flex items-center w-full justify-center transition-colors duration-200">
+                            <a href="{{ $event->link }}" target="_blank" class="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded inline-flex items-center w-full justify-center transition-colors duration-200">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -117,7 +118,7 @@
                                 Register via Google Form
                             </a>
                         </div>
-                        
+                        @else
                         <!-- Built-in Registration Form -->
                         <form>
                             <div class="mb-4">
@@ -145,6 +146,7 @@
                                 Register Now
                             </button>
                         </form>
+                        @endif
                         
                         <!-- Contact Information -->
                         <div class="mt-8 pt-6 border-t border-gray-200">
