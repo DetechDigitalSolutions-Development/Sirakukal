@@ -18,6 +18,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\View;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class EventResource extends Resource
 {
@@ -66,7 +69,6 @@ class EventResource extends Resource
                 TextInput::make('link')
                     ->label('Event Link')
                     ->url()
-                    ->required()
                     ->maxLength(255),
 
                 RichEditor::make('description')
@@ -134,7 +136,19 @@ class EventResource extends Resource
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->after(function ($record) {
+                    // Delete files before record deletion
+                    if ($record->image_url) {
+                        Storage::disk('public')->delete($record->image_url);
+                    }
+                    
+                    if ($record->references_links && is_array($record->references_links)) {
+                        foreach ($record->references_links as $file) {
+                            Storage::disk('public')->delete($file);
+                        }
+                    }
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

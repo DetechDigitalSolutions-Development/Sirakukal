@@ -1,6 +1,6 @@
 <!-- Hero Section -->
 <section 
-    class="relative w-full h-[450px] flex items-center justify-center bg-gray-500">
+    class="relative w-full h-[450px] flex items-center justify-center bg-gray-500" style="background-image: url('/images/impact-3.jpg')">
 
     <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-black/30"></div>
