@@ -33,7 +33,8 @@ return [
 
     'brand' => [
         'logo' => env('APP_URL') . '/images/Logo (1).png',
-        'favicon' => env('APP_URL') . '/images/Logo (1).png',
+        'favicon' => env('APP_URL') . '/images/favicon.ico',
+        'name' => env('APP_NAME'),
     ],
 
 
