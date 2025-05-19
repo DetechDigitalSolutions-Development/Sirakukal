@@ -1,3 +1,4 @@
+<!-- resources/views/filament/widgets/toggle-signup-form.blade.php -->
 <x-filament::widget>
     <x-filament::card>
         <x-slot name="header">
@@ -6,7 +7,7 @@
 
         <div class="space-y-4">
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                Toggle to control whether the volunteer registration form is available to the public.
+                Toggle to control volunteer registration form availability
             </p>
 
             <div class="flex items-center justify-between">
@@ -14,19 +15,24 @@
                     Public Signups
                 </span>
 
-                {{-- Sliding toggle --}}
                 <button
                     wire:click="toggle"
                     type="button"
-                    class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500
-                        {{ $enabled ? 'bg-green-600' : 'bg-red-500' }}"
+                    wire:loading.attr="disabled"
                     role="switch"
                     aria-checked="{{ $enabled ? 'true' : 'false' }}"
+                    @class([
+                        'relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ease-in-out',
+                        'bg-primary-600' => $enabled,
+                        'bg-gray-200 dark:bg-gray-700' => !$enabled,
+                    ])
                 >
                     <span
-                        aria-hidden="true"
-                        class="inline-block h-4 w-4 transform rounded-full bg-white transition duration-200
-                            {{ $enabled ? 'translate-x-6' : 'translate-x-1' }}"
+                        @class([
+                            'pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg transition duration-200 ease-in-out',
+                            'translate-x-6' => $enabled,
+                            'translate-x-1' => !$enabled,
+                        ])
                     ></span>
                 </button>
             </div>
