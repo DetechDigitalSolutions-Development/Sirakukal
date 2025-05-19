@@ -11,12 +11,14 @@ class Event extends Model
         'Online' => 'Online',
         'Physical' => 'Physical',
     ];
+
     const CATEGORY = [
         'Event' => 'Event',
         'Competition' => 'Competition',
         'Meetup' => 'Meetup',
         'Class' => 'Class',
     ];
+
     protected $fillable = [
         'name',
         'date',
@@ -26,11 +28,11 @@ class Event extends Model
         'image_url',
         'category',
         'type',
-        'references',
+        'references_links',
         'link',
     ];
 
     protected $casts = [
-    'references' => 'array'
-];
+        'references_links' => 'array', // Cast to array for multiple files
+    ];
 }
