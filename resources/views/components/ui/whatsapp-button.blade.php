@@ -2,7 +2,7 @@
     class="fixed bottom-20 right-6 z-50"
 >
     <a 
-        href="https://wa.me/{{ $phoneNumber ?? '' }}"
+        href="https://wa.me/{{ whatsapp_number() ?? '' }}"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none"

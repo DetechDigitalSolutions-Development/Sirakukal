@@ -9,6 +9,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\Page;
 use Filament\Notifications\Notification;
+use Filament\Forms\Components\TextInput;
+use libphonenumber\PhoneNumberUtil;
 
 class ListSiteSettings extends Page
 {
@@ -36,9 +38,9 @@ class ListSiteSettings extends Page
                     ->afterStateUpdated(function ($state) {
                         SiteSetting::updateOrCreate(['key' => 'join_form_enabled'], ['value' => $state ? 'true' : 'false']);
                     }),
-                \Filament\Forms\Components\TextInput::make('whatsapp_number')
+                TextInput::make('whatsapp_number')
                     ->label('WhatsApp Number')
-                    ->helperText('Number used for WhatsApp contact on the site.')
+                    ->helperText('Number used for WhatsApp contact on the site (with country code).')
                     ->afterStateUpdated(function ($state) {
                         SiteSetting::updateOrCreate(['key' => 'whatsapp_number'], ['value' => $state]);
                     }),
