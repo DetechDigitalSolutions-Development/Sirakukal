@@ -23,17 +23,31 @@
 
 <section 
     x-data="{
-        slides: {{ Js::from($upcomingEvents->map(fn($event) => [
-            'image' => 'storage/'.$event->image_url,
+        showDefaultSlide: {{ $join_form === 'true' ? 'true' : 'false'  }},
+        defaultSlide: {
+            image: '{{ asset('/images/volunteer2.avif') }}',
+            title: 'Join Our Volunteer Team',
+            description: 'Become part of our community and make a difference today!'
+        },
+        eventSlides: {{ Js::from($upcomingEvents->map(fn($event) => [
+            'image' => asset('storage/'.$event->image_url),
             'title' => $event->name,
             'description' => $event->description,
+            'id' => $event->id
         ])) }},
         currentIndex: 0,
+        get slides() {
+            return this.showDefaultSlide ? [this.defaultSlide] : this.eventSlides;
+        },
         next() {
-            this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+            if (!this.showDefaultSlide) {
+                this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+            }
         },
         startAutoSlide() {
-            setInterval(() => this.next(), 6000);
+            if (!this.showDefaultSlide) {
+                setInterval(() => this.next(), 6000);
+            }
         }
     }"
     x-init="startAutoSlide()" 
@@ -57,21 +71,17 @@
           <div class="relative z-10 h-full flex flex-col justify-center items-center text-white text-center px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
             <div class="text-lg md:text-xl max-w-2xl mb-6 prose text-white" x-html="slide.description"></div>
-            @php
-                $isJoinEnabled = $join_form === 'true';
-            @endphp
-
-            <a href="{{ $isJoinEnabled ? route('volunteers.volunteer') : route('about') }}"
+            
+            <a 
+              :href="showDefaultSlide ? '{{ route('volunteers.volunteer') }}' : '{{ route('events.index') }}/' + slide.id"
               class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-3xl shadow">
-                {{ $isJoinEnabled ? 'Join Us' : 'Learn More' }}
+                <span x-text="showDefaultSlide ? 'Join Us Now' : 'Learn More'"></span>
             </a>
-
           </div>
         </div>
       </div>
     </template>
   </div>
-
 </section>
 
 </body>

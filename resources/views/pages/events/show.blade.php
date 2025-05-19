@@ -20,7 +20,7 @@
                 <div class="md:flex">
                     <!-- Event Image - Takes up 40% on large screens -->
                     <div class="md:w-2/5">
-                        <img src="{{ $event->image_url ?? asset('images/events/default-event.jpg') }}" 
+                        <img src="{{ asset('storage/'.$event->image_url) ?? asset('images/events/default-event.jpg') }}" 
                              alt="{{ $event->title ?? 'Event' }}" 
                              class="w-full h-full object-cover">
                     </div>
