@@ -333,7 +333,11 @@
                 
                 <!-- CTA Buttons on the right -->
                 <div class="flex items-center justify-end space-x-3">
-                    <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-3 py-1 rounded hover:bg-sunset-orange transition duration-300 text-sm">Join Us</a>
+                    @if (is_join_form_enabled() === 'true')
+                        <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-3 py-1 rounded hover:bg-sunset-orange transition duration-300 text-sm">
+                            Join Us
+                        </a>
+                    @endif
                     <button 
                         @click="$dispatch('open-volunteer-search-modal'); mobileMenuOpen = false" 
                         class="bg-charcoal-black text-white font-medium px-3 py-1 rounded hover:bg-gray-700 transition duration-300 text-sm cursor-pointer"

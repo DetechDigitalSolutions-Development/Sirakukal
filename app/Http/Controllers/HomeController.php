@@ -26,7 +26,7 @@ class HomeController extends Controller
     $testimonials = Testimonial::all();
     $eventCount = Event::count(); // Total number of events
     $volunteersCount = Volunteer::count();
-    $join_form = SiteSetting::where('key','=','join_form_enabled');
+    $join_form = SiteSetting::where('key','=','join_form_enabled')->first()?->value;;
 
     // Format the impact statistics for the view
     $impactStats = $impactController->getImpactStats($volunteersCount, $eventCount);

@@ -17,13 +17,13 @@ class ImpactController extends Controller
     {
         $eventCount = Event::count(); // Total number of events
         $volunteersCount = Volunteer::count();
-        $story = Story::all();
+        $stories = Story::all();
         $join_form = SiteSetting::where('key','=','join_form_enabled');
 
         // Format the impact statistics for the view
         $impactStats = $this->getImpactStats($volunteersCount, $eventCount);
 
-        return view('pages.impact', compact('story', 'join_form', 'impactStats'));
+        return view('pages.impact', compact('stories', 'join_form', 'impactStats'));
     }
 
     /**

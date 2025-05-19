@@ -30,83 +30,21 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <!-- Empowering Local Communities -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ asset('images/impact/communities.jpg') }}" alt="Empowering Local Communities" class="w-full h-full object-cover">
+                @foreach ($stories as $story)
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                        <div class="h-48 overflow-hidden">
+                            <img src="{{ $story->image_url ? asset('storage/' . $story->image_url) : asset('images/default.jpg') }}"
+                                alt="{{ $story->author }}"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">{{ $story->author }}</h3>
+                            <p class="text-gray-600 text-sm">
+                                {{ $story->description }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Empowering Local Communities</h3>
-                        <p class="text-gray-600 text-sm">
-                            Our volunteers have been working tirelessly to provide support and resources to underserved communities, leading to improved quality of life and self-sufficiency.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Restoring Green Spaces -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ asset('images/impact/green-spaces.jpg') }}" alt="Restoring Green Spaces" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Restoring Green Spaces</h3>
-                        <p class="text-gray-600 text-sm">
-                            Through our reforestation initiatives, we have planted thousands of trees in urban parks and natural reserves. This effort helps combat climate change and creates beautiful spaces for communities.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Building Brighter Futures -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ asset('images/impact/housing.jpg') }}" alt="Building Brighter Futures" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Building Brighter Futures</h3>
-                        <p class="text-gray-600 text-sm">
-                            We partnered with local residents to build affordable housing, providing safe and stable homes for families in need. This project not only addresses housing insecurity but builds stronger communities.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Investing in Youth Education -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ asset('images/impact/education.jpg') }}" alt="Investing in Youth Education" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Investing in Youth Education</h3>
-                        <p class="text-gray-600 text-sm">
-                            Our after-school programs and tutoring services are helping students achieve academic success and build confidence. We believe education is the foundation for creating lasting change.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Protecting Our Environment -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ asset('images/impact/beach-cleanup.jpg') }}" alt="Protecting Our Environment" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Protecting Our Environment</h3>
-                        <p class="text-gray-600 text-sm">
-                            Regular clean-up drives and conservation projects are vital to preserving our natural landscapes and wildlife. We mobilize volunteers to make a tangible difference in environmental protection.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Providing Healthcare Access -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{ asset('images/impact/healthcare.jpg') }}" alt="Providing Healthcare Access" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Providing Healthcare Access</h3>
-                        <p class="text-gray-600 text-sm">
-                            Our mobile clinics and health awareness campaigns bring essential medical services to remote areas and underserved populations, improving health outcomes and quality of life.
-                        </p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -168,7 +106,9 @@
     </section>
     
     {{-- Join Us CTA Section --}}
+ @if ($join_form === 'true')   
     <section class="py-16 bg-flame-red text-white">
+
         <div class="container mx-auto px-8 max-w-4xl">
             <div class="text-center py-8">
                 <h2 class="text-3xl font-bold mb-4">Join Us in Making a Difference</h2>
@@ -184,4 +124,5 @@
             </div>
         </div>
     </section>
+@endif    
 @endsection
