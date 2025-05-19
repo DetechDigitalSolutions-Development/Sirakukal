@@ -26,11 +26,11 @@ class Event extends Model
         'image_url',
         'category',
         'type',
-        'reference_links',   
-        'link',             
+        'references',
+        'link',
     ];
 
     protected $casts = [
-    'reference_links' => 'array'
+    'references' => 'array'
 ];
 }
