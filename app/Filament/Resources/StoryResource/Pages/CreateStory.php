@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateStory extends CreateRecord
 {
     protected static string $resource = StoryResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
 }

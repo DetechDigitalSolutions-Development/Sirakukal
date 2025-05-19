@@ -47,7 +47,14 @@ class InquiryResource extends Resource
             ->columns([
                 TextColumn::make('full_name')->sortable()->searchable(),
                 TextColumn::make('email')->searchable(),
-                TextColumn::make('help_message')->limit(50)->wrap(),
+                TextColumn::make('help_message')->limit(50)->wrap()
+                    ->extraAttributes(['class' => 'cursor-pointer text-primary'])
+                    ->action(fn ($record) => \Filament\Notifications\Notification::make()
+                        ->title('-- Full Message --')
+                        ->body($record->help_message)
+                        ->send()
+                    ),
+                    
                 BooleanColumn::make('read')->label('Read'),
                 TextColumn::make('created_at')->since()->label('Received'),
             ])

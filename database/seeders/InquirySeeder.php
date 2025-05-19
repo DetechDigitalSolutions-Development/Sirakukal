@@ -13,7 +13,7 @@ class InquirySeeder extends Seeder
             [
                 'full_name' => 'Kavitha Raj',
                 'email' => 'kavitha@example.com',
-                'help_message' => 'I would like to know more about upcoming volunteering opportunities.',
+                'help_message' => 'I would like to know more about upcoming volunteering opportunitiesvgjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjcccccccccccccccccccccccccccccccchjjjfffrrrrrrrrrrrrrrrrrrrrrrccccccccccccccccccccccc.',
                 'read' => false,
                 'created_at' => now()->subDays(2),
                 'updated_at' => now()->subDays(2),
