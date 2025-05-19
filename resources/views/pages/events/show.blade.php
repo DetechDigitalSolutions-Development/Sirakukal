@@ -97,30 +97,37 @@
                     </div>
                     
                     <!-- Downloadable Files Section -->
-                    @if(isset($event->references) && !empty($event->references))
-                    <div class="mt-6 sm:mt-8">
-                        <h3 class="text-lg sm:text-xl font-bold mb-4">Event Resources</h3>
-                        <div class="h-1 w-16 sm:w-20 bg-primary rounded mb-4 sm:mb-6"></div>
-                        
-                        <div class="space-y-3 sm:space-y-4">
-                            @foreach($event->references as $reference)
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-gray-50 rounded-lg gap-3">
-                                <div class="flex items-center">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                                    </svg>
-                                    <span class="text-sm sm:text-base text-gray-700">{{ basename($reference) }}</span>
-                                </div>
-                                <a href="{{ $reference }}" download class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-200 text-sm sm:text-base">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                    </svg>
-                                    Download
-                                </a>
+                    @if(isset($event->references_links) && is_array($event->references_links) && count($event->references_links) > 0)
+                        <div class="mt-6 sm:mt-8">
+                            <h3 class="text-lg sm:text-xl font-bold mb-4">Event Resources</h3>
+                            <div class="h-1 w-16 sm:w-20 bg-primary rounded mb-4 sm:mb-6"></div>
+                            
+                            <div class="space-y-3 sm:space-y-4">
+                                @foreach($event->references_links as $reference)
+                                    @php
+                                        // Clean up the file path and get filename
+                                        $filePath = str_replace('\\', '/', $reference); // Normalize path
+                                        $fileName = basename($filePath);
+                                        $fileUrl = asset('storage/' . ltrim($filePath, '/'));
+                                    @endphp
+                                    
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-gray-50 rounded-lg gap-3">
+                                        <div class="flex items-center">
+                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <span class="text-sm sm:text-base text-gray-700">{{ $fileName }}</span>
+                                        </div>
+                                        <a href="{{ $fileUrl }}" download="{{ $fileName }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-200 text-sm sm:text-base">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                            </svg>
+                                            Download
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
-                    </div>
                     @endif
                 </div>
                 
