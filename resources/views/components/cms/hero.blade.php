@@ -65,8 +65,13 @@
           <div class="relative z-10 h-full flex flex-col justify-center items-center text-white text-center px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
             <p class="text-lg md:text-xl max-w-2xl mb-6" x-text="slide.description"></p>
-            <a href="{{ route('volunteers.register') }}" class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-3xl shadow">
-                 Join Us
+            @php
+                $isJoinEnabled = $join_form === 'true';
+            @endphp
+
+            <a href="{{ $isJoinEnabled ? route('volunteers.register') : route('about') }}"
+              class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-3xl shadow">
+                {{ $isJoinEnabled ? 'Join Us' : 'Learn More' }}
             </a>
 
           </div>

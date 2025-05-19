@@ -8,9 +8,11 @@
             <p class="text-gray-600 text-lg">
                 HopeHaven NGO is dedicated to empowering communities and fostering sustainable change through volunteer action and compassionate support.
             </p>
-            <a href="#join" class="inline-block bg-red-700 text-white px-6 py-3 rounded-md hover:bg-red-800 transition duration-300 font-semibold">
+            @if ($join_form === 'true')
+            <a href="{{ route('volunteers.volunteer') }}" class="inline-block bg-red-700 text-white px-6 py-3 rounded-md hover:bg-red-800 transition duration-300 font-semibold">
                 Join Our Cause →
             </a>
+            @endif
         </div>
 
         <!-- Right Image -->

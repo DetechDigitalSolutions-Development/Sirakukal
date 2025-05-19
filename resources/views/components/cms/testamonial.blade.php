@@ -11,7 +11,7 @@
                 </p>
                 <div class="flex items-center">
                     {{-- Use image_url from model if available, fall back to image for backward compatibility --}}
-                    <img src="{{ $testimonial['image_url'] ?? $testimonial['image'] ?? asset('images/default-avatar.jpg') }}" 
+                    <img src="{{ $testimonial->image_url ? asset('storage/' . $testimonial->image_url) : asset('images/default-avatar.jpg') }}"
                          alt="{{ $testimonial['author'] ?? $testimonial['name'] ?? 'Testimonial Author' }}" 
                          class="w-10 h-10 rounded-full mr-3">
                     <div>

@@ -280,6 +280,7 @@
     </section>
     
     {{-- Ready to Make a Difference CTA --}}
+@if ($join_form === 'true')
     <section class="py-16 bg-primary text-white text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-4">Ready to Make a Difference?</h2>
@@ -292,4 +293,5 @@
             </a>
         </div>
     </section>
+@endif
 @endsection

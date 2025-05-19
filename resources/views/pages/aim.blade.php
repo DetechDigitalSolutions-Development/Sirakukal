@@ -140,70 +140,24 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12">
-                <!-- Testimonial 1 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="italic text-gray-600 mb-4">
-                        "Volunteering with this organization changed my perspective and introduced me to lifelong friends."
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="{{ asset('images/volunteers/sarah.jpg') }}" alt="Sarah K" class="w-full h-full object-cover">
+                @foreach ($testimonials as $testimonial)
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="italic text-gray-600 mb-4">
+                            "{{ $testimonial->description }}"
                         </div>
-                        <div>
-                            <p class="font-bold">Sarah K.</p>
-                            <p class="text-sm text-gray-500">Project Lead Volunteer</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="italic text-gray-600 mb-4">
-                        "I've gained so much more than I've given. The skills I learned here were crucial for my career."
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="{{ asset('images/volunteers/david.jpg') }}" alt="David L" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-bold">David L.</p>
-                            <p class="text-sm text-gray-500">Community Organizer</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                <img src="{{ asset('storage/' . $testimonial->image_url) }}" alt="{{ $testimonial->author }}" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <p class="font-bold">{{ $testimonial->author }}</p>
+                                <p class="text-sm text-gray-500">{{ $testimonial->title ?? '' }}</p> <!-- Optional title if added -->
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="italic text-gray-600 mb-4">
-                        "Seeing the direct impact of our work in the community is incredibly rewarding."
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="{{ asset('images/volunteers/emily.jpg') }}" alt="Emily R" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-bold">Emily R.</p>
-                            <p class="text-sm text-gray-500">Weekend Volunteer</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 4 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="italic text-gray-600 mb-4">
-                        "The support and camaraderie among the volunteers made every moment enjoyable."
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="{{ asset('images/volunteers/michael.jpg') }}" alt="Michael B" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-bold">Michael B.</p>
-                            <p class="text-sm text-gray-500">Retired Engineer</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+
         </div>
     </section>
     
