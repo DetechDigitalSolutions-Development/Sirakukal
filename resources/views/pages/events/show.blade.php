@@ -94,10 +94,37 @@
                         <div class="h-1 w-20 bg-primary rounded mb-6"></div>
                         
                         <div class="prose max-w-none text-gray-700">
-                            <p class="mb-4">{{ $event->description }}</p>
+                            <p class="mb-4">{!! $event->description !!}</p>
                             
                         </div>
                     </div>
+                    
+                    <!-- Downloadable Files Section -->
+                    @if(isset($event->references) && !empty($event->references))
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold mb-4">Event Resources</h3>
+                        <div class="h-1 w-20 bg-primary rounded mb-6"></div>
+                        
+                        <div class="space-y-4">
+                            @foreach($event->references as $reference)
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <svg class="w-6 h-6 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span class="text-gray-700">{{ basename($reference) }}</span>
+                                </div>
+                                <a href="{{ $reference }}" download class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-200">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    Download
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
                     
                 </div>
                 
@@ -170,26 +197,16 @@
         </div>
     </section>
     
-    <!-- Related Events Section -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="text-center mb-10">
-                <h2 class="text-2xl font-bold mb-6">Other Events You Might Like</h2>
-                <div class="h-1 w-20 bg-primary rounded mx-auto"></div>
-            </div>
-            
+   <!-- Related Events Section -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold mb-6">Other Events You Might Like</h2>
+            <div class="h-1 w-20 bg-primary rounded mx-auto"></div>
+        </div>
+        
+        @if($relatedEvents->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @php
-                    // In a real application, you would fetch related events here
-                    // For mock data, we'll just display some random events
-                    $relatedEvents = array_filter(getMockEvents(), function($mockEvent) use ($event) {
-                        return $mockEvent->id != $event->id;
-                    });
-                    
-                    // Limit to 3 events
-                    $relatedEvents = array_slice($relatedEvents, 0, 3);
-                @endphp
-                
                 @foreach($relatedEvents as $relatedEvent)
                     <div class="relative">
                         @include('components.events.card', ['event' => $relatedEvent])
@@ -197,6 +214,9 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    </section>
+        @else
+            <p class="text-center text-gray-500">No related events found.</p>
+        @endif
+    </div>
+</section>
 @endsection

@@ -4,7 +4,7 @@
     
     // Default values for button
     $defaultText = 'Become a Volunteer';
-    $defaultLink = route('volunteers.register');
+    $defaultLink = route('volunteers.volunteer');
     $defaultClasses = 'inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-300';
     
     // Use provided values or defaults

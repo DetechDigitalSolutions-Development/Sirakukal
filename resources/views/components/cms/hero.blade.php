@@ -1,40 +1,39 @@
-@php
-$heroSlides = count($upcomingEvents ?? []) > 0 ? 
-    $upcomingEvents->map(fn($event) => [
-        'image' => 'storage/'.$event->image_url,
-        'title' => $event->name,
-        'description' => $event->description,
-    ]) : 
-    [
-        [
-            'image' => asset('images/image1.avif'),
-            'title' => 'Welcome to Sirakukal',
-            'description' => 'Join us in making a difference in our community through volunteering and support.',
-        ],
-        [
-            'image' => asset('images/image2.jpg'),
-            'title' => 'Empowering Communities',
-            'description' => 'Together we can create positive change and build stronger communities.',
-        ],
-    ];
-@endphp
+<!-- Include Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synchronized Auto Slider</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 1s;
+    }
+    .fade-enter-from, .fade-leave-to {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body class="m-0 p-0 overflow-x-hidden">
 
 <section 
     x-data="{
-        slides: {{ Js::from($heroSlides) }},
+        slides: {{ Js::from($upcomingEvents->map(fn($event) => [
+            'image' => 'storage/'.$event->image_url,
+            'title' => $event->name,
+            'description' => $event->description,
+        ])) }},
         currentIndex: 0,
         next() {
-            if (this.slides.length > 0) {
-                this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-            }
+            this.currentIndex = (this.currentIndex + 1) % this.slides.length;
         },
         startAutoSlide() {
-            if (this.slides.length > 0) {
-                console.log('Hero slider initialized with ' + this.slides.length + ' slides');
-                setInterval(() => this.next(), 6000);
-            } else {
-                console.error('No slides available for hero');
-            }
+            setInterval(() => this.next(), 6000);
         }
     }"
     x-init="startAutoSlide()" 
@@ -57,9 +56,14 @@ $heroSlides = count($upcomingEvents ?? []) > 0 ?
           <!-- Slide Content -->
           <div class="relative z-10 h-full flex flex-col justify-center items-center text-white text-center px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
-            <p class="text-lg md:text-xl max-w-2xl mb-6" x-text="slide.description"></p>
-            <a href="{{ route('volunteers.register') }}" class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-3xl shadow">
-                 Join Us
+            <div class="text-lg md:text-xl max-w-2xl mb-6 prose text-white" x-html="slide.description"></div>
+            @php
+                $isJoinEnabled = $join_form === 'true';
+            @endphp
+
+            <a href="{{ $isJoinEnabled ? route('volunteers.volunteer') : route('about') }}"
+              class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-3xl shadow">
+                {{ $isJoinEnabled ? 'Join Us' : 'Learn More' }}
             </a>
 
           </div>
@@ -70,7 +74,9 @@ $heroSlides = count($upcomingEvents ?? []) > 0 ?
 
 </section>
 
-@push('scripts')
+</body>
+</html>
+
 <!-- Include Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -88,4 +94,3 @@ $heroSlides = count($upcomingEvents ?? []) > 0 ?
         },
     });
 </script>
-@endpush

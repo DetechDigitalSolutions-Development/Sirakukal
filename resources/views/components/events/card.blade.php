@@ -29,7 +29,7 @@
         
         {{-- Description --}}
         <p class="text-gray-600 text-sm mb-3">
-            {{ $event->description ?? 'Join us for a day of community service and make a positive impact in our neighborhood.' }}
+         {!! $event->description !!}
         </p>
         
         {{-- View More link --}}

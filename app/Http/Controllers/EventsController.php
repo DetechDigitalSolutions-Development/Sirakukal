@@ -162,8 +162,12 @@ class EventsController extends Controller
         
         // When ready for production, uncomment this and comment out the mock data above
         //$event = Event::findOrFail($id);
+        $relatedEvents = Event::where('id', '!=', $id)
+                        ->inRandomOrder()
+                        ->limit(3)
+                        ->get();
         
-        return view('pages.events.show', compact('event'));
+        return view('pages.events.show', compact('event', 'relatedEvents'));
     }
 
     /**
