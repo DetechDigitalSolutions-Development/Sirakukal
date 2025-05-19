@@ -13,6 +13,14 @@ if (!function_exists('is_join_form_enabled')) {
         return !empty($value) ? $value : false;
     }
 }
+if (!function_exists('whatsapp_number')) {
+    function whatsapp_number()
+    {
+        $value = SiteSetting::where('key', 'whatsapp_number')->value('value');
+
+        return !empty($value) ? $value : "+94123456789";
+    }
+}
 
 if (!function_exists('greet')) {
     function greet($name = 'Guest') {

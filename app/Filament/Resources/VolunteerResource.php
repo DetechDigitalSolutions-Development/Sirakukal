@@ -44,8 +44,6 @@ class VolunteerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('volunteer_id')->required()->unique(ignoreRecord: true),
-
                 TextInput::make('full_name')->required(),
                 TextInput::make('initials_name')->label('Name with Initials'),
 
@@ -80,7 +78,6 @@ class VolunteerResource extends Resource
                     ->required(),
 
                 Textarea::make('reason_to_join')->label('Why do you want to join Sirakukal?')->required(),
-                Toggle::make('joined')->label('Has Joined?'),
             ])
             ->columns(2);
     }
@@ -88,9 +85,9 @@ class VolunteerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('volunteer_id')->label('ID')->sortable()->searchable(),
                 TextColumn::make('full_name')->label('Full Name')->sortable()->searchable(),
-                TextColumn::make('name_with_initials')->label('Name with Initials')->sortable()->searchable(),
+                TextColumn::make('initials_name')->label('Name with Initials')->sortable()->searchable(),
+                TextColumn::make('nic_number')->label('NIC')->sortable()->searchable(),
                 TextColumn::make('district')->sortable()->searchable(),
                 TextColumn::make('email')->sortable()->searchable(),
                 TextColumn::make('telephone')->label('Telephone')->searchable(),
@@ -98,7 +95,7 @@ class VolunteerResource extends Resource
                 TextColumn::make('status')->label('Are you?')->sortable()->searchable(),
                 TextColumn::make('institution')->label('Institution')->searchable(),
                 TextColumn::make('referred_by')->label('How found Sirakukal')->sortable(),
-                BooleanColumn::make('joined')->label('Joined')->sortable(),
+                TextColumn::make('joined_date')->label('Joined')->sortable(),
                 TextColumn::make('created_at')->dateTime()->label('Registered At')->sortable(),
             ])
             ->filters([
