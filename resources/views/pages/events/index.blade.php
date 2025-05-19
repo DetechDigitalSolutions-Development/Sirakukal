@@ -25,8 +25,8 @@
                         <h3 class="text-lg font-bold mb-4 pb-2 border-b border-gray-200">Advanced Filters</h3>
                         
                         <!-- Event Type Filter (Hidden) -->
-                        @if($activeType)
-                            <input type="hidden" name="type" value="{{ $activeType }}">
+                        @if($activeCategory)
+                            <input type="hidden" name="category" value="{{ $activeCategory }}">
                         @endif
                         
                         <!-- Location Filter - Searchable Dropdown (like district search) -->
@@ -128,27 +128,25 @@
                             </select>
                         </div>
                         
-                        <!-- Mode Filter - Regular Dropdown -->
+                        <!-- Event Type Filter - Regular Dropdown -->
                         <div class="mb-6">
-                            <h4 class="font-medium mb-2">Mode</h4>
-                            <select name="mode" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
-                                <option value="" {{ !isset($mode) || $mode === '' ? 'selected' : '' }}>Any Mode</option>
-                                <option value="physical" {{ isset($mode) && $mode === 'physical' ? 'selected' : '' }}>Physical</option>
-                                <option value="online" {{ isset($mode) && $mode === 'online' ? 'selected' : '' }}>Online</option>
+                            <h4 class="font-medium mb-2">Event Type</h4>
+                            <select name="type" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="" {{ !isset($eventType) || $eventType === '' ? 'selected' : '' }}>Any Type</option>
+                                <option value="Physical" {{ isset($eventType) && $eventType === 'Physical' ? 'selected' : '' }}>Physical</option>
+                                <option value="Online" {{ isset($eventType) && $eventType === 'Online' ? 'selected' : '' }}>Online</option>
                             </select>
                         </div>
                         
                         <!-- Filter Actions -->
-                        <div class="flex space-x-2">
-                            <button type="submit" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition-colors duration-200">
+                        <div class="grid grid-cols-2 divide-x divide-gray-200 overflow-hidden rounded">
+                            <button type="submit" class="py-3 text-center font-medium bg-primary text-white hover:bg-primary-dark transition-colors duration-200">
                                 Apply Filters
                             </button>
                             
-                            @if($location || $dateFilter || $activeType || (isset($mode) && $mode))
-                                <a href="{{ route('events.index') }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded text-center transition-colors duration-200">
-                                    Clear
-                                </a>
-                            @endif
+                            <a href="{{ route('events.index') }}" class="py-3 text-center font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                                Clear Filters
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -158,10 +156,10 @@
                     <!-- Filter buttons -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
                         <div class="grid grid-cols-4 divide-x divide-gray-200">
-                            @foreach($eventTypes as $type)
-                                <a href="{{ route('events.index', ['type' => $type]) }}" 
-                                class="py-3 text-center font-medium {{ $activeType === $type ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-50' }} transition-colors duration-200">
-                                    {{ $type }}
+                            @foreach($eventTypes as $category)
+                                <a href="{{ route('events.index', ['category' => $category]) }}" 
+                                class="py-3 text-center font-medium {{ $activeCategory === $category ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-50' }} transition-colors duration-200">
+                                    {{ $category }}
                                 </a>
                             @endforeach
                         </div>
@@ -173,9 +171,13 @@
                     {{-- Group events by date --}}
                     @php
                         $groupedEvents = collect($events)->groupBy(function ($event) {
-                            return $event->date->format('F d');
+                            // Parse date if it's a string, otherwise use it directly if it's already a Carbon instance
+                            $eventDate = is_string($event->date) ? \Carbon\Carbon::parse($event->date) : $event->date;
+                            return $eventDate->format('F d');
                         })->sortBy(function ($events, $date) {
-                            return $events->first()->date->timestamp;
+                            $firstEvent = $events->first();
+                            $eventDate = is_string($firstEvent->date) ? \Carbon\Carbon::parse($firstEvent->date) : $firstEvent->date;
+                            return $eventDate->timestamp;
                         });
                     @endphp
                     
@@ -187,7 +189,7 @@
                                 @foreach($dateEvents as $event)
                                     <div class="relative">
                                         @include('components.events.card', ['event' => $event])
-                                        <div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded">{{ $event->type }}</div>
+                                        <div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded">{{ $event->category }}</div>
                                     </div>
                                 @endforeach
                             </div>
@@ -199,8 +201,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                         <h3 class="text-lg font-medium text-gray-700 mb-2">No events found</h3>
-                        <p class="text-gray-500">There are no upcoming {{ $activeType ? strtolower($activeType) : 'events' }} at this time.</p>
-                        @if($activeType)
+                        <p class="text-gray-500">There are no upcoming {{ $activeCategory ? strtolower($activeCategory) : 'events' }} at this time.</p>
+                        @if($activeCategory)
                             <a href="{{ route('events.index') }}" class="mt-4 inline-block text-primary hover:underline">View all events</a>
                         @endif
                     </div>
@@ -357,16 +359,9 @@
                 <!-- Contact Form -->
                 <div class="md:w-2/3">
                     <form class="bg-white rounded-lg shadow-sm p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First name</label>
-                                <input type="text" id="first_name" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your first name">
-                            </div>
-                            
-                            <div>
-                                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Last name</label>
-                                <input type="text" id="last_name" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your last name">
-                            </div>
+                        <div class="mb-6">
+                            <label for="full_name" class="block text-sm font-medium text-gray-700 mb-1">Full name</label>
+                            <input type="text" id="full_name" class="w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-primary focus:border-primary" placeholder="Enter your full name">
                         </div>
                         
                         <div class="mb-6">

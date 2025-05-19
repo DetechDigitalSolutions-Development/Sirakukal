@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Testimonial;
 use App\Models\SiteSetting;
 use App\Models\Volunteer;
+use App\Models\Announcement;
 use App\Http\Controllers\ImpactController;
 
 
@@ -30,8 +31,32 @@ class HomeController extends Controller
 
     // Format the impact statistics for the view
     $impactStats = $impactController->getImpactStats($volunteersCount, $eventCount);
+    
+    // Create multiple mock announcements for testing
+    $announcements = [];
+    
+    // First mock announcement
+    $announcement1 = new Announcement();
+    $announcement1->author = 'John Doe';
+    $announcement1->description = 'We are excited to announce our upcoming community cleanup initiative taking place next month. Join us in making our neighborhood cleaner and greener. Volunteers of all ages are welcome to participate.';
+    $announcement1->image_url = '/images/image2.jpg';
+    $announcements[] = $announcement1;
+    
+    // Second mock announcement
+    $announcement2 = new Announcement();
+    $announcement2->author = 'Jane Smith';
+    $announcement2->description = 'Sirakukal is partnering with local schools for our new education program. We will be providing resources and mentorship to underprivileged students starting next semester.';
+    $announcement2->image_url = '/images/impact-1.png';
+    $announcements[] = $announcement2;
+    
+    // Third mock announcement
+    $announcement3 = new Announcement();
+    $announcement3->author = 'Mike Johnson';
+    $announcement3->description = 'Thank you to all volunteers who participated in last weekend\'s food drive. We collected over 500 pounds of food for local families in need.';
+    $announcement3->image_url = '/images/impact-4.jpg';
+    $announcements[] = $announcement3;
 
-    return view('pages.home', compact('upcomingEvents','testimonials','join_form','volunteersCount','eventCount','impactStats'));
+    return view('pages.home', compact('upcomingEvents','testimonials','join_form','volunteersCount','eventCount','impactStats','announcements'));
 }
 
     /**
