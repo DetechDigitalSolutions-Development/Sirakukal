@@ -338,12 +338,12 @@
                 </div>
                 
                 <!-- CTA Buttons and Language Selector on the right -->
-                <div class="flex items-center justify-end space-x-3">
+                <div class="flex items-center justify-end space-x-2">
                     <!-- Language Selector -->
                     <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" type="button" class="flex items-center text-charcoal-black hover:text-flame-red text-xs font-medium rounded-full bg-gray-100 px-2 py-1 transition-colors duration-200">
+                        <button @click="open = !open" type="button" class="flex items-center text-charcoal-black hover:text-flame-red text-[10px] sm:text-xs font-medium rounded-full bg-gray-100 px-1.5 sm:px-2 py-0.5 sm:py-1 transition-colors duration-200">
                             <span class="font-semibold">EN</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-0.5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5 sm:h-3 sm:w-3 ml-0.5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
@@ -356,21 +356,21 @@
                              x-transition:leave="transition ease-in duration-75" 
                              x-transition:leave-start="opacity-100 transform scale-100" 
                              x-transition:leave-end="opacity-0 transform scale-95"
-                             class="absolute right-0 mt-1 w-24 rounded shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                             class="absolute right-0 mt-1 w-20 sm:w-24 rounded shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
                             <div class="divide-y divide-gray-100" role="menu" aria-orientation="vertical">
-                                <button class="block w-full text-left px-3 py-2 text-xs text-charcoal-black hover:bg-gray-50 bg-white font-semibold" role="menuitem">English</button>
-                                <button class="block w-full text-left px-3 py-2 text-xs text-charcoal-black hover:bg-gray-50" role="menuitem">தமிழ்</button>
+                                <button class="block w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 text-[10px] sm:text-xs text-charcoal-black hover:bg-gray-50 bg-white font-semibold" role="menuitem">English</button>
+                                <button class="block w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 text-[10px] sm:text-xs text-charcoal-black hover:bg-gray-50" role="menuitem">தமிழ்</button>
                             </div>
                         </div>
                     </div>
                     @if (is_join_form_enabled() === 'true')
-                        <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-3 py-1 rounded hover:bg-sunset-orange transition duration-300 text-sm">
+                        <a href="{{ route('volunteers.volunteer') }}" class="bg-flame-red text-white font-medium px-2 sm:px-3 py-0.5 sm:py-1 rounded hover:bg-sunset-orange transition duration-300 text-[10px] sm:text-sm whitespace-nowrap">
                             Join Us
                         </a>
                     @endif
                     <button 
                         @click="$dispatch('open-volunteer-search-modal'); mobileMenuOpen = false" 
-                        class="bg-charcoal-black text-white font-medium px-3 py-1 rounded hover:bg-gray-700 transition duration-300 text-sm cursor-pointer"
+                        class="bg-charcoal-black text-white font-medium px-2 sm:px-3 py-0.5 sm:py-1 rounded hover:bg-gray-700 transition duration-300 text-[10px] sm:text-sm cursor-pointer whitespace-nowrap"
                     >
                         Find my Id
                     </button>
@@ -378,7 +378,7 @@
                     <!-- Mobile menu button -->
                     <button type="button" class="md:hidden text-gray-500 hover:text-flame-red focus:outline-none" 
                             @click="mobileMenuOpen = !mobileMenuOpen">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
@@ -388,30 +388,21 @@
             </div>
             
             <!-- Mobile Navigation Menu -->
-            <div class="md:hidden fixed inset-x-0 top-16 z-40" x-show="mobileMenuOpen" 
+            <div class="md:hidden fixed inset-x-0 top-14 sm:top-16 z-40" x-show="mobileMenuOpen" 
                  x-transition:enter="transition ease-out duration-200" 
                  x-transition:enter-start="opacity-0 transform -translate-y-10" 
                  x-transition:enter-end="opacity-100 transform translate-y-0" 
                  x-transition:leave="transition ease-in duration-150" 
                  x-transition:leave-start="opacity-100 transform translate-y-0" 
                  x-transition:leave-end="opacity-0 transform -translate-y-10">
-                <div class="bg-white shadow-lg border-t border-gray-100 py-2 max-h-[calc(100vh-4rem)] overflow-y-auto">
+                <div class="bg-white shadow-lg border-t border-gray-100 py-2 max-h-[calc(100vh-3.5rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto">
                     <nav class="container mx-auto px-4 flex flex-col space-y-1">
-                        <a href="/" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Home</a>
-                        <a href="{{ route('about') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">About Us</a>
-                        <a href="{{ route('events.index') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Events</a>
-                        <a href="{{ route('aim') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Aim</a>
-                        <a href="{{ route('impact') }}" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Impact</a>
-                        <a href="{{ route('events.index') }}#contact" class="py-2 px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200">Contact</a>
-                        
-                        <!-- Mobile Language Toggle -->
-                        <div class="mt-3 pt-3 border-t border-gray-100">
-                            <p class="px-4 mb-1 text-xs text-gray-500 uppercase font-medium">Select Language</p>
-                            <div class="grid grid-cols-2 gap-2 px-4">
-                                <button class="py-2 text-sm bg-flame-red text-white rounded-md font-medium flex items-center justify-center">English</button>
-                                <button class="py-2 text-sm text-gray-700 bg-gray-100 rounded-md font-medium flex items-center justify-center">தமிழ்</button>
-                            </div>
-                        </div>
+                        <a href="/" class="py-1.5 sm:py-2 px-3 sm:px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200 text-sm sm:text-base">Home</a>
+                        <a href="{{ route('about') }}" class="py-1.5 sm:py-2 px-3 sm:px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200 text-sm sm:text-base">About Us</a>
+                        <a href="{{ route('events.index') }}" class="py-1.5 sm:py-2 px-3 sm:px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200 text-sm sm:text-base">Events</a>
+                        <a href="{{ route('aim') }}" class="py-1.5 sm:py-2 px-3 sm:px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200 text-sm sm:text-base">Aim</a>
+                        <a href="{{ route('impact') }}" class="py-1.5 sm:py-2 px-3 sm:px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200 text-sm sm:text-base">Impact</a>
+                        <a href="{{ route('events.index') }}#contact" class="py-1.5 sm:py-2 px-3 sm:px-4 text-gray-800 hover:bg-gray-50 hover:text-flame-red rounded-md font-medium transition-all duration-200 text-sm sm:text-base">Contact</a>
                     </nav>
                 </div>
             </div>

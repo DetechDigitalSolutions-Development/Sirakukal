@@ -37,7 +37,7 @@
         }
     }"
     x-init="startAutoSlide()" 
-    class="relative h-[90vh] w-full overflow-hidden">
+    class="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
 
   <!-- Slides container -->
   <div class="relative h-full w-full">
@@ -54,15 +54,15 @@
           <div class="absolute inset-0 bg-black opacity-70"></div>
 
           <!-- Slide Content -->
-          <div class="relative z-10 h-full flex flex-col justify-center items-center text-white text-center px-4">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
-            <div class="text-lg md:text-xl max-w-2xl mb-6 prose text-white" x-html="slide.description"></div>
+          <div class="relative z-10 h-full flex flex-col justify-center items-center text-white text-center px-4 sm:px-6 md:px-8">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 md:mb-4" x-text="slide.title"></h1>
+            <div class="text-sm sm:text-base md:text-lg lg:text-xl max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mb-4 sm:mb-5 md:mb-6 prose text-white" x-html="slide.description"></div>
             @php
                 $isJoinEnabled = $join_form === 'true';
             @endphp
 
             <a href="{{ $isJoinEnabled ? route('volunteers.volunteer') : route('about') }}"
-              class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-3xl shadow">
+              class="bg-yellow-600 hover:bg-red-700 text-white font-semibold py-2 sm:py-2.5 md:py-3 px-6 sm:px-8 md:px-10 rounded-3xl shadow text-sm sm:text-base">
                 {{ $isJoinEnabled ? 'Join Us' : 'Learn More' }}
             </a>
 
