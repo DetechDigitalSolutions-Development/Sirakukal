@@ -1,6 +1,6 @@
 <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
     {{-- Event Image --}}
-    <img src="{{ $event->image_url ? 'storage/' . $event->image_url : asset('images/events/default-event.jpg') }}" alt="{{ $event->name ?? 'Event' }}" 
+    <img src="{{ $event->image_url ? asset('storage/'. $event->image_url) : asset('images/events/default-event.jpg') }}" alt="{{ $event->name ?? 'Event' }}" 
         class="w-full h-48 object-cover">
     
     {{-- Event Content --}}

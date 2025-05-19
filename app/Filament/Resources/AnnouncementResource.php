@@ -51,7 +51,13 @@ class AnnouncementResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                 ->after(function ($record) {
+                    // Delete files before record deletion
+                    if ($record->image_url) {
+                        Storage::disk('public')->delete($record->image_url);
+                    }
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

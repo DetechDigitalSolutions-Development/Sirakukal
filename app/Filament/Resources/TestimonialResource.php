@@ -55,7 +55,13 @@ class TestimonialResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                 ->after(function ($record) {
+                    // Delete files before record deletion
+                    if ($record->image_url) {
+                        Storage::disk('public')->delete($record->image_url);
+                    }
+                }),
             ]);
     }
 
