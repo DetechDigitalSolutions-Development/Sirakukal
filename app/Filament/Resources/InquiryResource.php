@@ -27,7 +27,7 @@ class InquiryResource extends Resource
 
     public static function getNavigationBadgeColor(): string | null
     {
-        return 'danger';
+        return 'warning';
     }
 
 

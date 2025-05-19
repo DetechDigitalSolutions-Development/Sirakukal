@@ -405,9 +405,7 @@
                     <div>
                         <h4 class="text-lg font-semibold text-golden-sunrise mb-3">Get Involved</h4>
                         <ul class="space-y-2">
-                            <li><a href="{{ route('volunteers.register') }}" class="text-gray-400 hover:text-sunset-orange">Become a Volunteer</a></li>
-                            <li><a href="{{ route('volunteers.search') }}" class="text-gray-400 hover:text-sunset-orange">Volunteer Login</a></li>
-                            <li><a href="#donate" class="text-gray-400 hover:text-sunset-orange">Donate</a></li>
+                            
                         </ul>
                     </div>
                 </div>

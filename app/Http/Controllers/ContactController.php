@@ -31,7 +31,7 @@ class ContactController extends Controller
             'read'         => 0,
         ]);
 
-        return back()->with('success', 'Your inquiry has been submitted successfully!');
+        return redirect('/events#contact')->with('success', 'Your inquiry has been submitted successfully!');
     }
 
     /**
