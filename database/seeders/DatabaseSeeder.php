@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
         VolunteerSeeder::class,
         EventSeeder::class,
         InquirySeeder::class,
+        
+        
     ]);
 
         User::factory()->create([
