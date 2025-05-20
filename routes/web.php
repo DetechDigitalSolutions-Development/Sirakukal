@@ -109,10 +109,20 @@ Route::get('/impact', [ImpactController::class, 'index'])->name('impact');
 Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
 
 if (is_join_form_enabled() === 'true') {
-        Route::prefix('volunteers')->group(function () {
-            Route::get('/volunteer', [VolunteerController::class, 'create'])->name('volunteers.volunteer');
-            Route::post('/', [VolunteerController::class, 'store'])->name('volunteers.store');
-        });
+    Route::prefix('volunteers')->group(function () {
+        Route::get('/volunteer', [VolunteerController::class, 'create'])->name('volunteers.volunteer');
+        Route::post('/', [VolunteerController::class, 'store'])->name('volunteers.store');
+    });
+} else {
+    Route::prefix('volunteers')->group(function () {
+        Route::get('/volunteer', function () {
+            return redirect()->route('home');
+        })->name('volunteers.volunteer');
+        
+        Route::post('/', function () {
+            return redirect()->route('home');
+        })->name('volunteers.store');
+    });
 }
 /**
  * Events Routes
