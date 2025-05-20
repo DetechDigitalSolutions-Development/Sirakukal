@@ -28,11 +28,11 @@ class Event extends Model
         'image_url',
         'category',
         'type',
-        'references_links',
+        'references',
         'link',
     ];
 
     protected $casts = [
-        'references_links' => 'array', // Cast to array for multiple files
+        'references' => 'array', // Cast to array for multiple files
     ];
 }

@@ -91,19 +91,19 @@
                         <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">About This Event</h2>
                         <div class="h-1 w-16 sm:w-20 bg-primary rounded mb-4 sm:mb-6"></div>
                         
-                        <div class="prose max-w-none text-sm sm:text-base text-gray-700">
-                            <p class="mb-4">{!! $event->description !!}</p>
+                        <div class="prose max-w-none text-sm sm:text-base text-gray-700 break-words">
+                            <p class="mb-4 whitespace-pre-wrap">{!! $event->description !!}</p>
                         </div>
                     </div>
                     
                     <!-- Downloadable Files Section -->
-                    @if(isset($event->references_links) && is_array($event->references_links) && count($event->references_links) > 0)
+                    @if(isset($event->reference_links) && is_array($event->reference_links) && count($event->reference_links) > 0)
                         <div class="mt-6 sm:mt-8">
                             <h3 class="text-lg sm:text-xl font-bold mb-4">Event Resources</h3>
                             <div class="h-1 w-16 sm:w-20 bg-primary rounded mb-4 sm:mb-6"></div>
                             
                             <div class="space-y-3 sm:space-y-4">
-                                @foreach($event->references_links as $reference)
+                                @foreach($event->reference_links as $reference)
                                     @php
                                         // Clean up the file path and get filename
                                         $filePath = str_replace('\\', '/', $reference); // Normalize path

@@ -30,7 +30,7 @@
         
         {{-- Description --}}
         <p class="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">
-         {!! $event->description !!}
+            {!! Str::limit(strip_tags($event->description), 100) !!}
         </p>
         
         {{-- View More link --}}
