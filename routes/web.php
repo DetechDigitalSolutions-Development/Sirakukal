@@ -108,10 +108,12 @@ Route::get('/aim', [AimController::class, 'index'])->name('aim');
 Route::get('/impact', [ImpactController::class, 'index'])->name('impact');
 Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
 
-Route::prefix('volunteers')->group(function () {
-    Route::get('/volunteer', [VolunteerController::class, 'create'])->name('volunteers.volunteer');
-    Route::post('/', [VolunteerController::class, 'store'])->name('volunteers.store');
-});
+if (is_join_form_enabled() === 'true') {
+        Route::prefix('volunteers')->group(function () {
+            Route::get('/volunteer', [VolunteerController::class, 'create'])->name('volunteers.volunteer');
+            Route::post('/', [VolunteerController::class, 'store'])->name('volunteers.store');
+        });
+}
 /**
  * Events Routes
  */
