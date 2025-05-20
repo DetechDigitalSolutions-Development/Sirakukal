@@ -25,7 +25,7 @@ class HomeController extends Controller
     $upcomingEvents = Event::where('date', '>=', $today)->orderBy('date')->get();
     // Get all rows from testimonials table
     $testimonials = Testimonial::all();
-    $eventCount = Event::count(); // Total number of events
+    $eventCount = Event::where('date', '<', now())->count() + 600; // Total number of events
     $volunteersCount = Volunteer::count();
     $join_form = SiteSetting::where('key','=','join_form_enabled')->first()?->value;;
 

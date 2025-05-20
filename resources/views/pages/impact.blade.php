@@ -60,47 +60,99 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
                 <!-- Gallery images - Row 1 -->
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-1.jpg') }}" alt="Impact moment - Workshop" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/1.jpg') }}" alt="Impact moment 1" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-auto md:row-span-2 overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-2.jpg') }}" alt="Impact moment - Plant" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/2.jpg') }}" alt="Impact moment 2" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-3.jpg') }}" alt="Impact moment - Park" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/3.jpg') }}" alt="Impact moment 3" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-4.jpg') }}" alt="Impact moment - Education" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/4.jpg') }}" alt="Impact moment 4" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 
                 <!-- Gallery images - Row 2 -->
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-5.jpg') }}" alt="Impact moment - Community gathering" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/5.jpg') }}" alt="Impact moment 5" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-6.jpg') }}" alt="Impact moment - River" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/6.jpg') }}" alt="Impact moment 6" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-7.jpg') }}" alt="Impact moment - Medical aid" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/7.jpg') }}" alt="Impact moment 7" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
-                
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/8.jpg') }}" alt="Impact moment 8" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+
                 <!-- Gallery images - Row 3 -->
-                <div class="aspect-square overflow-hidden rounded-lg md:row-span-2">
-                    <img src="{{ asset('images/gallery/impact-8.jpg') }}" alt="Impact moment - Team celebration" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/9.jpg') }}" alt="Impact moment 9" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-9.jpg') }}" alt="Impact moment - Food aid" class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                </div>
-                <div class="aspect-auto overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-10.jpg') }}" alt="Impact moment - Medical care" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/10.jpg') }}" alt="Impact moment 10" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-11.jpg') }}" alt="Impact moment - Art project" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/11.jpg') }}" alt="Impact moment 11" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
-                
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/12.jpg') }}" alt="Impact moment 12" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+
                 <!-- Gallery images - Row 4 -->
                 <div class="aspect-square overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/gallery/impact-12.jpg') }}" alt="Impact moment - Volunteer presentation" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img src="{{ asset('images/impact/13.jpg') }}" alt="Impact moment 13" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/14.jpg') }}" alt="Impact moment 14" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/15.jpg') }}" alt="Impact moment 15" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/16.jpg') }}" alt="Impact moment 16" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+
+                <!-- Gallery images - Row 5 -->
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/17.jpg') }}" alt="Impact moment 17" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/18.jpg') }}" alt="Impact moment 18" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/19.jpg') }}" alt="Impact moment 19" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/20.jpg') }}" alt="Impact moment 20" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+
+                <!-- Gallery images - Row 6 -->
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/21.jpg') }}" alt="Impact moment 21" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/22.jpg') }}" alt="Impact moment 22" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/23.jpg') }}" alt="Impact moment 23" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/24.jpg') }}" alt="Impact moment 24" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+
+                <!-- Gallery images - Row 7 -->
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/25.jpg') }}" alt="Impact moment 25" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/26.jpg') }}" alt="Impact moment 26" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg">
+                    <img src="{{ asset('images/impact/27.jpg') }}" alt="Impact moment 27" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+    
             </div>
         </div>
     </section>
