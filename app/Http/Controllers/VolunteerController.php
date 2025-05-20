@@ -32,6 +32,7 @@ class VolunteerController extends Controller
             ],
             'date_of_birth' => 'required|date',
             'applicant_type' => 'required|string|in:'.implode(',', Volunteer::EDUCATION_LEVELS),
+            'status' => 'required|string|in:'.implode(',', Volunteer::STATUS),
             'institution' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:15',

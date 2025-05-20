@@ -61,10 +61,12 @@ class Volunteer extends Model
         'Online' => 'Online',
     ];
 
-    const STATUS =[
+    const STATUS = [
         'Working' => 'Working',
         'Studying' => 'Studying',
         'Leaving School' => 'Leaving School',
+        'Unemployed' => 'Unemployed',
+        'Self-Employed' => 'Self-Employed',
     ];
 
     protected $fillable = [
@@ -75,9 +77,10 @@ class Volunteer extends Model
         'nic_number',
         'date_of_birth',
         'joined_date',
-        'status',
+        'applicant_type',
         'institution',
         'email',
+        'status',
         'phone',
         'whatsapp',
         'referred_by',

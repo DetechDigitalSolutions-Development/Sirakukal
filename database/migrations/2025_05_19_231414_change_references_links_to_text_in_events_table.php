@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             // Change column type from string to text to accommodate larger data
-            $table->text('references')->nullable()->change();
+            $table->text('references_links')->nullable()->change();
         });
     }
 
@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             // Revert back to string if needed
-            $table->string('references')->nullable()->change();
+            $table->string('references_links')->nullable()->change();
         });
     }
 };

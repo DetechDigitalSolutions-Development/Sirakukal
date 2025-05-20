@@ -99,7 +99,7 @@ class VolunteerResource extends Resource
                 TextColumn::make('created_at')->dateTime()->label('Registered At')->sortable(),
             ])
             ->filters([
-                Tables\Filters\TernaryFilter::make('joined')->label('Joined Status'),
+                Tables\Filters\TernaryFilter::make('joined_date')->label('Joined Status'),
                 Tables\Filters\SelectFilter::make('status')
                     ->options(Volunteer::EDUCATION_LEVELS),
 

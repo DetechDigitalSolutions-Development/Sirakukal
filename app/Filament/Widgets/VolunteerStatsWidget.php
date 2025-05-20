@@ -18,7 +18,7 @@ class VolunteerStatsWidget extends BaseWidget
     {
         return [
             Card::make('Total Volunteers', Volunteer::count()),
-            Card::make('Joined Volunteers', Volunteer::where('joined', true)->count()),
+            Card::make('Joined Volunteers', Volunteer::where('joined_date', true)->count()),
         ];
     }
 }
