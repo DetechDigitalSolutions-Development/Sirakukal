@@ -91,8 +91,8 @@
                         <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">About This Event</h2>
                         <div class="h-1 w-16 sm:w-20 bg-primary rounded mb-4 sm:mb-6"></div>
                         
-                        <div class="prose max-w-none text-sm sm:text-base text-gray-700">
-                            <p class="mb-4">{!! $event->description !!}</p>
+                        <div class="prose max-w-none text-sm sm:text-base text-gray-700 break-words">
+                            <p class="mb-4 whitespace-pre-wrap">{!! $event->description !!}</p>
                         </div>
                     </div>
                     
