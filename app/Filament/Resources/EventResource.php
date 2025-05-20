@@ -16,20 +16,16 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TimePicker;
-use Filament\Forms\Components\View;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
-
-    //protected static ?int $navigationSort = 3;
-
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
-
     protected static ?string $navigationGroup = 'Programs';
     protected static ?int $navigationSort = 1;
 
@@ -85,18 +81,20 @@ class EventResource extends Resource
                     ->preserveFilenames()
                     ->downloadable()
                     ->openable()
-                    ->maxSize(2048),
-
+                    ->maxSize(2048)
+                    ->deleteUploadedFileUsing(function ($file) {
+                        if (! $file) return;
+                        Storage::disk('public')->delete($file);
+                    }),
 
                 FileUpload::make('references_links')
-                    ->label('References_links Document')
+                    ->label('Reference Documents')
                     ->multiple()
                     ->directory('event-reference_links')
                     ->disk('public')
                     ->preserveFilenames()
                     ->downloadable()
                     ->openable()
-                    //->maxSize(2048) 
                     ->acceptedFileTypes([
                         'application/pdf',
                         'application/msword',
@@ -104,15 +102,18 @@ class EventResource extends Resource
                         'image/jpeg',
                         'image/png',
                     ])
-                    ->helperText('Allowed types: PDF, DOC, DOCX, JPG, PNG')  //Max size: 2MB.
+                    ->helperText('Allowed types: PDF, DOC, DOCX, JPG, PNG')
                     ->columnSpanFull()
                     ->disablePreview()
                     ->imageResizeTargetWidth(1200)
                     ->imageResizeTargetHeight(1200)
                     ->imageResizeMode('cover')
+                    ->deleteUploadedFileUsing(function ($file) {
+                        if (! $file) return;
+                        Storage::disk('public')->delete($file);
+                    }),
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -137,21 +138,46 @@ class EventResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                ->after(function ($record) {
-                    // Delete files before record deletion
-                    if ($record->image_url) {
-                        Storage::disk('public')->delete($record->image_url);
-                    }
-                    
-                    if ($record->references_links && is_array($record->references_links)) {
-                        foreach ($record->references_links as $file) {
-                            Storage::disk('public')->delete($file);
+                    ->after(function ($record) {
+                        // Delete files before record deletion
+                        if ($record->image_url) {
+                            Storage::disk('public')->delete($record->image_url);
                         }
-                    }
-                }),
+                        
+                        if ($record->references_links) {
+                            $files = is_array($record->references_links) 
+                                ? $record->references_links
+                                : json_decode($record->references_links, true) ?? [];
+                                
+                            foreach ($files as $file) {
+                                Storage::disk('public')->delete($file);
+                            }
+                        }
+                    }),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->action(function (Collection $records) {
+                        $records->each(function ($record) {
+                            // Delete files
+                            if ($record->image_url) {
+                                Storage::disk('public')->delete($record->image_url);
+                            }
+                            
+                            if ($record->references_links) {
+                                $files = is_array($record->references_links) 
+                                    ? $record->references_links
+                                    : json_decode($record->references_links, true) ?? [];
+                                    
+                                foreach ($files as $file) {
+                                    Storage::disk('public')->delete($file);
+                                }
+                            }
+                        });
+                        
+                        // Delete records
+                        $records->each->delete();
+                    }),
             ]);
     }
 
