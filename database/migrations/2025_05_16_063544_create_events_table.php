@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('category')->nullable();
             $table->string('link')->nullable();
-            $table->string('reference_links')->nullable();
+            $table->text('references_links')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamps();
         });

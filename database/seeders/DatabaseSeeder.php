@@ -1,6 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,14 +23,15 @@ class DatabaseSeeder extends Seeder
         VolunteerSeeder::class,
         EventSeeder::class,
         InquirySeeder::class,
-        
+        SiteSettingSeeder::class,
+        UserSeeder::class,
         
     ]);
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => bcrypt('test123'),
+            'password' => Hash::make('password'),
         ]);
     }
 }

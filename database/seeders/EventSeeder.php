@@ -20,7 +20,7 @@ class EventSeeder extends Seeder
                 'type' => 'Physical',
                 'category' => 'Event',
                 'link' => 'https://example.com/coastal-cleanup',
-                'reference_links' => 'event-docs/coastal-guidelines.pdf' // Array format for single file
+                'references_links' => 'event-docs/coastal-guidelines.pdf' // Array format for single file
             ],
             [
                 'name' => 'Kandy Esala Perahera',
@@ -32,7 +32,7 @@ class EventSeeder extends Seeder
                 'type' => 'Physical',
                 'category' => 'Event',
                 'link' => 'https://example.com/esala-perahera',
-                'reference_links' => 'event-docs/perahera-schedule.pdf'
+                'references_links' => 'event-docs/perahera-schedule.pdf'
                   
                 
             ],
@@ -46,7 +46,7 @@ class EventSeeder extends Seeder
                 'type' => 'Online',
                 'category' => 'Class',
                 'link' => 'https://example.com/tech-workshop',
-                'reference_links' => 'event-docs/workshop-materials.pdf'
+                'references_links' => 'event-docs/workshop-materials.pdf'
             ],
             // Add more events as needed...
         ];
