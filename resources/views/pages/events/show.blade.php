@@ -111,14 +111,21 @@
                                         $fileUrl = asset('storage/' . ltrim($filePath, '/'));
                                     @endphp
                                     
-                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-gray-50 rounded-lg gap-3">
-                                        <div class="flex items-center">
-                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                                            </svg>
-                                            <span class="text-sm sm:text-base text-gray-700">{{ $fileName }}</span>
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                                        <div class="flex items-center mb-3 sm:mb-0">
+                                            <div class="flex-shrink-0 bg-gray-50 p-2 rounded-lg mr-3">
+                                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-sm sm:text-base font-medium text-gray-900 truncate">{{ $fileName }}</p>
+                                                <p class="text-xs text-gray-500 mt-0.5">Click to download</p>
+                                            </div>
                                         </div>
-                                        <a href="{{ $fileUrl }}" download="{{ $fileName }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-200 text-sm sm:text-base">
+                                        <a href="{{ $fileUrl }}" 
+                                           download="{{ $fileName }}" 
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-200 text-sm font-medium w-full sm:w-auto">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                             </svg>

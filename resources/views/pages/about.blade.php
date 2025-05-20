@@ -160,10 +160,10 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                 <!-- Impact Item 1 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
-                    <div class="relative">
-                        <img src="{{ asset('images/impact-1.png') }}" alt="Community Gardens" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                    <div class="relative pt-2">
+                        <img src="{{ asset('images/impact/1.jpg') }}" alt="Community Gardens" class="w-full h-44 sm:h-48 md:h-52 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Building community gardens together
+                        A throwback to childhood and rural school sports—keeping traditions alive.
                         </div>
                     </div>
                 </div>
@@ -171,9 +171,9 @@
                 <!-- Impact Item 2 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-2.jpg') }}" alt="Education" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/36.jpg') }}" alt="Education" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Educating the next generation
+                            Community learning sessions
                         </div>
                     </div>
                 </div>
@@ -181,9 +181,9 @@
                 <!-- Impact Item 3 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-3.jpg') }}" alt="Environmental Cleanup" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/10.jpg') }}" alt="Environmental Cleanup" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Keeping our environment clean
+                            Youth empowerment programs
                         </div>
                     </div>
                 </div>
@@ -191,9 +191,9 @@
                 <!-- Impact Item 4 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-4.jpg') }}" alt="Health Services" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/11.jpg') }}" alt="Health Services" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Providing essential health services
+                            Community health initiatives
                         </div>
                     </div>
                 </div>
@@ -201,9 +201,9 @@
                 <!-- Impact Item 5 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-5.jpg') }}" alt="Food Distribution" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/29.jpg') }}" alt="Food Distribution" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Distributing aid to families
+                            Cultural celebrations
                         </div>
                     </div>
                 </div>
@@ -211,9 +211,9 @@
                 <!-- Impact Item 6 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-6.jpeg') }}" alt="Tree Planting" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/45.jpg') }}" alt="Tree Planting" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Planting trees for a greener future
+                            Environmental awareness programs
                         </div>
                     </div>
                 </div>
@@ -221,9 +221,9 @@
                 <!-- Impact Item 7 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-7.jpeg') }}" alt="Skill Building" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/14.jpg') }}" alt="Skill Building" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Skill-building workshops
+                            Community workshops
                         </div>
                     </div>
                 </div>
@@ -231,9 +231,49 @@
                 <!-- Impact Item 8 -->
                 <div class="overflow-hidden rounded-lg shadow-md">
                     <div class="relative">
-                        <img src="{{ asset('images/impact-8.jpg') }}" alt="Community Support" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <img src="{{ asset('images/impact/15.jpg') }}" alt="Community Support" class="w-full h-40 sm:h-44 md:h-48 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
-                            Adding color to the community
+                            Youth development programs
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Item 9 -->
+                <div class="overflow-hidden rounded-lg shadow-md">
+                    <div class="relative">
+                        <img src="{{ asset('images/impact/37.jpg') }}" alt="Community Support" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
+                            Educational outreach
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Item 10 -->
+                <div class="overflow-hidden rounded-lg shadow-md">
+                    <div class="relative">
+                        <img src="{{ asset('images/impact/17.jpg') }}" alt="Community Support" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
+                            Community engagement
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Item 11 -->
+                <div class="overflow-hidden rounded-lg shadow-md">
+                    <div class="relative">
+                        <img src="{{ asset('images/impact/18.jpg') }}" alt="Community Support" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
+                            Skill development sessions
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Item 12 -->
+                <div class="overflow-hidden rounded-lg shadow-md">
+                    <div class="relative">
+                        <img src="{{ asset('images/impact/28.jpg') }}" alt="Community Support" class="w-full h-40 sm:h-44 md:h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-xs sm:text-sm">
+                            Community celebrations
                         </div>
                     </div>
                 </div>

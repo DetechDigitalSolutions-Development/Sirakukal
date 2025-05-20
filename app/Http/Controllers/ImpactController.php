@@ -15,7 +15,7 @@ class ImpactController extends Controller
      */
     public function index()
     {
-        $eventCount = Event::count(); // Total number of events
+        $eventCount = Event::where('date', '<', now())->count() + 600; // Count past events plus 600 completed events
         $volunteersCount = Volunteer::count();
         $stories = Story::all();
         $join_form = SiteSetting::where('key','=','join_form_enabled');
