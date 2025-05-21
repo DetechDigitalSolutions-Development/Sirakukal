@@ -10,7 +10,7 @@ if (!function_exists('is_join_form_enabled')) {
     {
         $value = SiteSetting::where('key', 'join_form_enabled')->value('value');
 
-        return !empty($value) ? $value : false;
+        return !empty($value) ? $value : 'false';
     }
 }
 if (!function_exists('whatsapp_number')) {
