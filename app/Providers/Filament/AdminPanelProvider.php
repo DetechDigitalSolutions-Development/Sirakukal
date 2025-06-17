@@ -2,7 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Http\Middleware\Authenticate;
+use App\Http\Middleware\FilamentAuthenticate; // Your custom middleware
+//use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -26,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Sirakukal')
-            ->brandLogo(asset('images/Logo (1).png'), true) // Second parameter makes it lazy-loaded
+            ->brandLogo(asset('images/Logo (1).PNG'), true) // Second parameter makes it lazy-loaded
             ->brandLogoHeight('3.5rem') // Adjust logo size
             ->favicon(asset('images/favicon.ico')) // Add favicon
             ->colors([
@@ -63,7 +64,8 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
+                //Authenticate::class,
+                FilamentAuthenticate::class, // Using your custom middleware
             ])
             ->viteTheme('resources/css/filament/admin/theme.css'); // For custom CSS
     }

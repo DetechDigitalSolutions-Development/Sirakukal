@@ -9,7 +9,8 @@
     <!-- Or for .ico -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
 
-    @vite('resources/css/app.css')
+    {{-- Load Vite assets --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <!-- Alpine.js for interactive components -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

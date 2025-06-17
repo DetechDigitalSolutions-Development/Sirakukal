@@ -16,62 +16,62 @@ use App\Http\Controllers\ContactController;
 
 
 
-function getMockTestimonials()
-{
-    return [
-        [
-            // Fields matching the Testimonial model: 'author', 'description', 'image_url'
-            'author' => 'Sarah Chan',
-            'author_title' => 'Volunteer from UK', // Additional field for UI display
-            'description' => 'Volunteering in Sri Lanka was a life-changing experience. The local community welcomed us warmly, and seeing the direct impact of our work was incredibly rewarding. Highly recommend!',
-            'image_url' => asset('images/impact-1.png'),
+// function getMockTestimonials()
+// {
+//     return [
+//         [
+//             // Fields matching the Testimonial model: 'author', 'description', 'image_url'
+//             'author' => 'Sarah Chan',
+//             'author_title' => 'Volunteer from UK', // Additional field for UI display
+//             'description' => 'Volunteering in Sri Lanka was a life-changing experience. The local community welcomed us warmly, and seeing the direct impact of our work was incredibly rewarding. Highly recommend!',
+//             'image_url' => asset('images/impact-1.png'),
             
-            // Keep legacy fields for backward compatibility
-            'name' => 'Sarah Chan',
-            'title' => 'Volunteer from UK',
-            'content' => 'Volunteering in Sri Lanka was a life-changing experience. The local community welcomed us warmly, and seeing the direct impact of our work was incredibly rewarding. Highly recommend!',
-            'image' => asset('images/impact-1.png'),
-        ],
-        [
-            // Fields matching the Testimonial model: 'author', 'description', 'image_url'
-            'author' => 'Omar Hassan',
-            'author_title' => 'Volunteer from Egypt', // Additional field for UI display
-            'description' => 'The team organized everything seamlessly. I felt safe and supported throughout my stay. Working on the education project gave me a new perspective on global challenges and the power of collective action.',
-            'image_url' => asset('images/impact-2.jpg'),
+//             // Keep legacy fields for backward compatibility
+//             'name' => 'Sarah Chan',
+//             'title' => 'Volunteer from UK',
+//             'content' => 'Volunteering in Sri Lanka was a life-changing experience. The local community welcomed us warmly, and seeing the direct impact of our work was incredibly rewarding. Highly recommend!',
+//             'image' => asset('images/impact-1.png'),
+//         ],
+//         [
+//             // Fields matching the Testimonial model: 'author', 'description', 'image_url'
+//             'author' => 'Omar Hassan',
+//             'author_title' => 'Volunteer from Egypt', // Additional field for UI display
+//             'description' => 'The team organized everything seamlessly. I felt safe and supported throughout my stay. Working on the education project gave me a new perspective on global challenges and the power of collective action.',
+//             'image_url' => asset('images/impact-2.jpg'),
             
-            // Keep legacy fields for backward compatibility
-            'name' => 'Omar Hassan',
-            'title' => 'Volunteer from Egypt',
-            'content' => 'The team organized everything seamlessly. I felt safe and supported throughout my stay. Working on the education project gave me a new perspective on global challenges and the power of collective action.',
-            'image' => asset('images/impact-2.jpg'),
-        ],
-    ];
-}
+//             // Keep legacy fields for backward compatibility
+//             'name' => 'Omar Hassan',
+//             'title' => 'Volunteer from Egypt',
+//             'content' => 'The team organized everything seamlessly. I felt safe and supported throughout my stay. Working on the education project gave me a new perspective on global challenges and the power of collective action.',
+//             'image' => asset('images/impact-2.jpg'),
+//         ],
+//     ];
+// }
 
 
 
-function getMockVolunteer($nic = null)
-{
-    return (object) [
-        'volunteer_id' => 'VOL-' . rand(100000, 999999),
-        'full_name' => 'John Doe',
-        'initials_name' => 'J. Doe',
-        'district' => 'Colombo',
-        'address' => '123 Main Street, Colombo 05',
-        'nic_number' => $nic ?? '123456789V',
-        'date_of_birth' => now()->subYears(25)->format('Y-m-d'),
-        'joined_date' => now()->subMonths(2)->format('Y-m-d'),
-        'status' => 'Active',
-        'institution' => 'University of Colombo',
-        'email' => 'john.doe@example.com',
-        'phone' => '+94 77 1234567',
-        'whatsapp' => '+94 77 1234567',
-        'referred_by' => 'social_media',
-        'reason_to_join' => 'I want to contribute to community development',
-        'joined' => 'yes',
-        'created_at' => now()->subMonths(3)
-    ];
-}
+// function getMockVolunteer($nic = null)
+// {
+//     return (object) [
+//         'volunteer_id' => 'VOL-' . rand(100000, 999999),
+//         'full_name' => 'John Doe',
+//         'initials_name' => 'J. Doe',
+//         'district' => 'Colombo',
+//         'address' => '123 Main Street, Colombo 05',
+//         'nic_number' => $nic ?? '123456789V',
+//         'date_of_birth' => now()->subYears(25)->format('Y-m-d'),
+//         'joined_date' => now()->subMonths(2)->format('Y-m-d'),
+//         'status' => 'Active',
+//         'institution' => 'University of Colombo',
+//         'email' => 'john.doe@example.com',
+//         'phone' => '+94 77 1234567',
+//         'whatsapp' => '+94 77 1234567',
+//         'referred_by' => 'social_media',
+//         'reason_to_join' => 'I want to contribute to community development',
+//         'joined' => 'yes',
+//         'created_at' => now()->subMonths(3)
+//     ];
+// }
 /**
  * Main Pages Routes
  */
